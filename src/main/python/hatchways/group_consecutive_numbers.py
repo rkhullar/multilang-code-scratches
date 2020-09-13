@@ -1,7 +1,9 @@
-from typing import Iterator, List, Tuple
+from typing import Iterator, List, Tuple, TypeVar
+
+T = TypeVar('T')
 
 
-def iter_pairs(data: List[int]) -> Iterator[Tuple]:
+def iter_pairs(data: List[T]) -> Iterator[Tuple[T, T]]:
     for i in range(len(data) - 1):
         yield data[i], data[i + 1]
 
