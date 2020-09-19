@@ -1,16 +1,8 @@
 from typing import List
+from utils.silent import silent
 
 
-def sum_1_to_n(n: int) -> int:
-    return n * (n+1) // 2
-
-
-def find_missing_unsorted(data: List[int]) -> int:
-    n = len(data) + 1
-    return sum_1_to_n(n) - sum(data)
-
-
-def find_missing_sorted(data: List[int]) -> int:
+def find_missing_1(data: List[int], n: int) -> int:
     candidate, left, right = None, 0, len(data) - 1
     while left <= right:
         middle = (left + right) // 2
@@ -27,47 +19,33 @@ def find_missing_sorted(data: List[int]) -> int:
     return candidate
 
 
-def find_missing(data: List[int]) -> int:
+def find_missing_2(data: List[int], n: int) -> int:
+    left, right = 0, len(data) - 1
+    with silent(data) as view:
+        while left <= right:
+            middle = (left + right) // 2
+            # check item immediately to the right
+            if (view[middle + 1] and view[middle] + 1 != view[middle + 1]) or (middle == len(data) - 1 and view[middle] != n):
+                return middle + 2
+            # check item immediately to the left
+            if view[middle] - 1 != view[middle - 1] or (middle == 0 and view[middle] != 1):
+                return middle + 1
+            if view[middle] != middle + 1:
+                right = middle - 1  # search left
+            else:
+                left = middle + 1  # search right
+
+
+def find_missing(data: List[int], n: int) -> int:
     """
     finds the missing number from a sorted array of integers [1...N]
     [1,3,4,5] -> 2
     """
-    # return find_missing_unsorted(data)
-    return find_missing_sorted(data)
-
-
-def binary_search_rec(data: List[int], key: int, left: int = 0, right: int = None) -> int:
-    right = len(data) - 1 if right is None else right
-    middle = (left + right) // 2
-    if data[middle] == key:
-        return middle  # match
-    elif left == right:
-        return -1  # does not exist
-    elif key < data[middle]:
-        return binary_search_rec(data, key, left, middle - 1)  # search left
-    elif key > data[middle]:
-        return binary_search_rec(data, key, middle + 1, right)  # search right
-
-
-def binary_search_iter(data: List[int], key: int) -> int:
-    left, right = 0, len(data) - 1
-    while left <= right:
-        middle = (left + right) // 2
-        if key < data[middle]:
-            right = middle - 1  # search left
-        elif key > data[middle]:
-            left = middle + 1  # search right
-        else:
-            return middle
-
-
-def binary_search(data: List[int], key: int) -> int:
-    # return binary_search_rec(data, key)
-    return binary_search_iter(data, key)
+    # return find_missing_1(data, n)
+    return find_missing_2(data, n)
 
 
 if __name__ == '__main__':
-    x = [1,2,3,5]
-    y = find_missing(x)
-    e = 4
+    x = [1, 2, 3, 4, 5]
+    y = find_missing(x, 5)
     print(y)
