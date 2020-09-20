@@ -75,5 +75,4 @@ class ListUtilTest {
                 Arguments.of(new Integer[]{}, null)
         );
     }
-
 }

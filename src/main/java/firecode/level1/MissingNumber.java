@@ -14,5 +14,4 @@ public class MissingNumber {
             sum_arr += x;
         return sum_10 - sum_arr;
     }
-
 }
