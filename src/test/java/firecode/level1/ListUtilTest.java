@@ -1,32 +1,15 @@
-package level1;
+package firecode.level1;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static level1.Solution.*;
+import static firecode.level1.ListUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class SolutionTest {
-
-    @ParameterizedTest(name = "fib({0}) = {1}")
-    @CsvSource({"0, 0", "1, 1", "2, 1", "3, 2", "4, 3", "5, 5", "6, 8", "7, 13", "8, 21", "9, 34", "10, 55"})
-    void testRecursiveFibonacci(int x, long e) {
-        long y = recursiveFibonacci(x);
-        assertEquals(e, y);
-    }
-
-    @Test
-    void testFindMissingNumber() {
-        int[] arr = {1, 2, 4, 5, 6, 7, 8, 9, 10};
-        int y = findMissingNumber(arr);
-        assertEquals(3, y);
-    }
-
+class ListUtilTest {
 
     @ParameterizedTest
     @MethodSource("provideArgsForTestDeleteAtHead")
@@ -92,4 +75,5 @@ class SolutionTest {
                 Arguments.of(new Integer[]{}, null)
         );
     }
+
 }

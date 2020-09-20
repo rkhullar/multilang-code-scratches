@@ -1,31 +1,6 @@
-package level1;
+package firecode.level1;
 
-public class Solution {
-
-    // Fibonacci Number
-    public static int fib(int n) {
-        return recursiveFibonacci(n);
-    }
-
-    public static int recursiveFibonacci(int n) {
-        if (n == 0 || n == 1)
-            return  n;
-        else
-            return fib(n-1) + fib(n-2);
-    }
-
-    // Find the Missing Number in a Set of Numbers from 1 to 10
-    public static int sum_1toN(int n) {
-        return (n + 1) * n / 2;
-    }
-
-    public static int findMissingNumber(int[] arr) {
-        final int sum_10 = sum_1toN(10);
-        int sum_arr = 0;
-        for (int x: arr)
-            sum_arr += x;
-        return sum_10 - sum_arr;
-    }
+public class ListUtil {
 
     // Delete a List's Head Node
     public static ListNode deleteAtHead(ListNode head) {
