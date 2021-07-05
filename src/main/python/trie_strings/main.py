@@ -28,6 +28,7 @@ def build_trie(words: List[str]) -> Trie[chr]:
 
 def group_strings(words: List[str]):
     trie = build_trie(words)
+    print(trie)
     for x in trie.traverse():
         print(x)
 

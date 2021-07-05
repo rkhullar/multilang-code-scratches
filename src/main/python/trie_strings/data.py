@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Generic, Iterator, List, Optional, Set, TypeVar
 
 T = TypeVar('T')
@@ -7,8 +7,7 @@ T = TypeVar('T')
 @dataclass
 class TrieNode(Generic[T]):
     data: T
-    children: Set['TrieNode[T]'] = None
-    # parent: 'TrieNode[T]' = None
+    children: Set['TrieNode[T]'] = field(default_factory=set)
 
     def __hash__(self):
         return hash(self.data)
@@ -17,23 +16,16 @@ class TrieNode(Generic[T]):
         return self[child] is not None
 
     def __getitem__(self, child: T) -> Optional['TrieNode[T]']:
-        if self.children is not None:
-            for node in self.children:
-                if node.data == child:
-                    return node
+        for node in self.children:
+            if node.data == child:
+                return node
 
     def __setitem__(self, child: T, grandchild: Optional[T] = None) -> None:
-        if self.children is None:
-            self.children = set()
-
         if node := self[child]:
             node[grandchild] = None
-
         else:
             node = TrieNode(data=child)
             self.children.add(node)
-            # node.parent = self
-
             if grandchild is not None:
                 node[grandchild] = None
 
@@ -58,4 +50,8 @@ class Trie(Generic[T]):
 
 
 if __name__ == '__main__':
-    pass
+    root: TrieNode['chr'] = TrieNode(data=None)
+    root['x'] = 'a'
+    root['x']['a'] = 'b'
+    root['x']['c'] = 'd'
+    print(root)
