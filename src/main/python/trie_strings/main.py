@@ -16,7 +16,7 @@ def build_trie_1(words: List[str]):
 
 
 def build_trie(words: List[str]) -> Trie[chr]:
-    trie = Trie(root=TrieNode(data=None))
+    trie = Trie()
     for word in words:
         cursor = trie.root
         for char in word:

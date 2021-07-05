@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Generic, Iterator, List, Optional, Set, TypeVar
+from typing import Dict, Generic, Iterator, List, Optional, TypeVar
 
 T = TypeVar('T')
 
@@ -7,32 +7,25 @@ T = TypeVar('T')
 @dataclass
 class TrieNode(Generic[T]):
     data: T
-    children: Set['TrieNode[T]'] = field(default_factory=set)
-
-    def __hash__(self):
-        return hash(self.data)
+    children: Dict[T, 'TrieNode[T]'] = field(default_factory=dict)
 
     def __contains__(self, child: T) -> bool:
         return self[child] is not None
 
     def __getitem__(self, child: T) -> Optional['TrieNode[T]']:
-        for node in self.children:
-            if node.data == child:
-                return node
+        return self.children.get(child)
 
     def __setitem__(self, child: T, grandchild: Optional[T] = None) -> None:
-        if node := self[child]:
-            node[grandchild] = None
-        else:
-            node = TrieNode(data=child)
-            self.children.add(node)
-            if grandchild is not None:
-                node[grandchild] = None
+        if child not in self.children:
+            self.children[child] = TrieNode(data=child)
+
+        if grandchild is not None:
+            self[child][grandchild] = None
 
 
 @dataclass
 class Trie(Generic[T]):
-    root: TrieNode[T] = None
+    root: TrieNode[T] = field(default_factory=lambda: TrieNode(data=None))
 
     def traverse(self, mode: str = 'bfs') -> Iterator[T]:
         if mode == 'bfs':
@@ -45,13 +38,13 @@ class Trie(Generic[T]):
         while len(queue) > 0:
             node = queue.pop(0)
             yield node.data
-            if node.children is not None:
-                queue.extend(node.children)
+            queue.extend(node.children.values())
 
 
 if __name__ == '__main__':
-    root: TrieNode['chr'] = TrieNode(data=None)
-    root['x'] = 'a'
-    root['x']['a'] = 'b'
-    root['x']['c'] = 'd'
+    root = TrieNode(data='.')
+    root['0'] = 'a'
+    root['0'] = 'b'
+    root['1'] = 'x'
+    root['1'] = 'y'
     print(root)
