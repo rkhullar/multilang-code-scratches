@@ -1,9 +1,10 @@
-from typing import List
+from collections import defaultdict
+from typing import Dict, List
 from data import Trie
 
 
 '''
-def build_trie_1(words: List[str]):
+def build_trie(words: List[str]):
     trie = dict()
     for word in words:
         cursor = trie
@@ -26,15 +27,22 @@ def build_trie(words: List[str]) -> Trie[chr]:
     return trie
 
 
-def group_strings(words: List[str]):
+def group_strings(words: List[str]) -> Dict[str, List[str]]:
     trie = build_trie(words)
-    # for x in trie.traverse():
-    #     print(x)
+    groups = defaultdict(list)
     for path in trie.iter_paths():
+        if len(path[-1]) != 0:
+            continue
+        end_idx = len(path) - 1
+        while len(path[end_idx]) < 2:
+            end_idx -= 1
+        key = ''.join(node.data for node in path[1:end_idx])
         word = ''.join(node.data for node in path[1:])
-        print(word)
+        groups[key].append(word)
+    return {key: list(values) for key, values in groups.items()}
 
 
 if __name__ == '__main__':
-    words = ['foo_bar_xyz', 'foo_bar_abc']
-    group_strings(words)
+    words = ['foo_bar_xyz', 'foo_bar_abc', 'foo_baz_1', 'foo_baz_2']
+    result = group_strings(words)
+    print(result)

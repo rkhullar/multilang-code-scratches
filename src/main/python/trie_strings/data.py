@@ -8,6 +8,7 @@ T = TypeVar('T')
 class TrieNode(Generic[T]):
     data: T
     children: Dict[T, 'TrieNode[T]'] = field(default_factory=dict)
+    parent: 'TrieNode' = field(default=None, repr=False)
 
     def __contains__(self, child: T) -> bool:
         return self[child] is not None
@@ -17,7 +18,7 @@ class TrieNode(Generic[T]):
 
     def __setitem__(self, child: T, grandchild: Optional[T] = None) -> None:
         if child not in self.children:
-            self.children[child] = TrieNode(data=child)
+            self.children[child] = TrieNode(data=child, parent=self)
 
         if grandchild is not None:
             self[child][grandchild] = None
@@ -48,10 +49,8 @@ class Trie(Generic[T]):
         queue.append(tuple([self.root]))
         while len(queue) > 0:
             path = queue.pop(0)
-            node = path[-1]
-            if len(node) == 0:
-                yield path
-            for child in node.children.values():
+            yield path
+            for child in path[-1].children.values():
                 next_path = path + tuple([child])
                 queue.append(next_path)
 
