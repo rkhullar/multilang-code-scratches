@@ -1,5 +1,5 @@
 from typing import List
-from data import Trie, TrieNode
+from data import Trie
 
 
 '''
