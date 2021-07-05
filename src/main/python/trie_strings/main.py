@@ -28,9 +28,11 @@ def build_trie(words: List[str]) -> Trie[chr]:
 
 def group_strings(words: List[str]):
     trie = build_trie(words)
-    print(trie)
-    for x in trie.traverse():
-        print(x)
+    # for x in trie.traverse():
+    #     print(x)
+    for path in trie.iter_paths():
+        word = ''.join(node.data for node in path[1:])
+        print(word)
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Dict, Generic, Iterator, List, Optional, TypeVar
+from typing import Dict, Generic, Iterator, List, Optional, Tuple, TypeVar
 
 T = TypeVar('T')
 
@@ -22,6 +22,9 @@ class TrieNode(Generic[T]):
         if grandchild is not None:
             self[child][grandchild] = None
 
+    def __len__(self) -> int:
+        return len(self.children)
+
 
 @dataclass
 class Trie(Generic[T]):
@@ -39,6 +42,18 @@ class Trie(Generic[T]):
             node = queue.pop(0)
             yield node.data
             queue.extend(node.children.values())
+
+    def iter_paths(self) -> Iterator[Tuple[T, ...]]:
+        queue: List[Tuple[T, ...]] = list()
+        queue.append(tuple([self.root]))
+        while len(queue) > 0:
+            path = queue.pop(0)
+            node = path[-1]
+            if len(node) == 0:
+                yield path
+            for child in node.children.values():
+                next_path = path + tuple([child])
+                queue.append(next_path)
 
 
 if __name__ == '__main__':
