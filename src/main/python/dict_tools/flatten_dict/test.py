@@ -28,4 +28,5 @@ def to_json(data: dict):
 
 print(to_json(test_input))
 result = flatten_dict(test_input, separator='/')
+print(to_json(test_output))
 assert to_json(test_output) == to_json(result)
