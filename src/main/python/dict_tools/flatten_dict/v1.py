@@ -19,12 +19,3 @@ def iter_dict_flatten(data, separator: str = '/') -> Iterator[Tuple[str, str]]:
 
 def flatten_dict(data, separator: str = '/') -> Dict[str, str]:
     return {key: val for key, val in iter_dict_flatten(data, separator)}
-
-
-if __name__ == '__main__':
-    data = {
-        'a': {'b': {'c': 'd'}},
-        'w': ['x', {'y': 'z'}]
-    }
-    data = flatten_dict(data)
-    print(json.dumps(data, indent=4, sort_keys=True))
