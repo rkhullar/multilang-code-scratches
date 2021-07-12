@@ -31,6 +31,18 @@ class TrieNode(Generic[T]):
 class Trie(Generic[T]):
     root: TrieNode[T] = field(default_factory=lambda: TrieNode(data=None))
 
+    def __contains__(self, child: T) -> bool:
+        return child in self.root
+
+    def __getitem__(self, child: T) -> Optional[TrieNode[T]]:
+        return self.root[child]
+
+    def __setitem__(self, child: T, grandchild: Optional[T] = None) -> None:
+        self.root[child] = grandchild
+
+    def __len__(self) -> int:
+        return len(self.root)
+
     def traverse(self, mode: str = 'bfs') -> Iterator[T]:
         if mode == 'bfs':
             return self._traverse_bfs()
@@ -44,21 +56,24 @@ class Trie(Generic[T]):
             yield node.data
             queue.extend(node.children.values())
 
-    def iter_paths(self) -> Iterator[Tuple[T, ...]]:
-        queue: List[Tuple[T, ...]] = list()
+    def iter_paths(self) -> Iterator[Tuple[TrieNode[T], ...]]:
+        queue: List[Tuple[TrieNode[T], ...]] = list()
         queue.append(tuple([self.root]))
         while len(queue) > 0:
             path = queue.pop(0)
-            yield path
+            if not path[-1].children:
+                yield path
             for child in path[-1].children.values():
                 next_path = path + tuple([child])
                 queue.append(next_path)
 
 
 if __name__ == '__main__':
-    root = TrieNode(data='.')
-    root['0'] = 'a'
-    root['0'] = 'b'
-    root['1'] = 'x'
-    root['1'] = 'y'
-    print(root)
+    trie: Trie[chr] = Trie()
+    trie['0'] = 'a'
+    trie['1'] = 'b'
+    trie['0']['a'] = 'x'
+    trie['1']['b'] = 'y'
+    print(trie)
+    for path in trie.iter_paths():
+        print([node.data for node in path])
