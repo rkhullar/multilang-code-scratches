@@ -30,19 +30,23 @@ def _trace(series: Iterator[T]) -> Iterator[Tuple[T, T]]:
             curr_item = next(iterator)
             yield prev_item, curr_item
         except StopIteration:
-            pass
+            break
 
 
 def trace(series: Iterator[T]) -> Iterator[TrackedItem[T]]:
     index, iterator = 0, _trace(_trace(series))
-    next(iterator)
+    prev_curr, curr_next = None, None
     while True:
         try:
             prev_curr, curr_next = next(iterator)
+            if not prev_curr:
+                continue
             yield TrackedItem(data=curr_next[0], prev=prev_curr[0], next=curr_next[1], index=index)
             index += 1
         except StopIteration:
-            yield TrackedItem(data=curr_next[1], prev=curr_next[0], next=None, index=index+1)
+            if curr_next:
+                yield TrackedItem(data=curr_next[1], prev=curr_next[0], next=None, index=index)
+            break
 
 
 def fn() -> list:
@@ -55,5 +59,5 @@ if __name__ == '__main__':
     #     print(x)
     # for a, b in _trace(fn()):
     #     print(a, b)
-    for tracked_item in trace([1,2]):
-        print(tracked_item)
+    for tracked_item in trace(fn()):
+        print(tracked_item, dict(first=tracked_item.first, last=tracked_item.last))
