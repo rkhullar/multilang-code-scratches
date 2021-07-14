@@ -3,19 +3,6 @@ from typing import Dict, List
 from data.tree.trie import Trie
 
 
-'''
-def build_trie(words: List[str]):
-    trie = dict()
-    for word in words:
-        cursor = trie
-        for char in word:
-            if char not in cursor:
-                cursor[char] = dict()
-            cursor = cursor[char]
-    return trie
-'''
-
-
 def build_trie(words: List[str]) -> Trie[chr]:
     trie = Trie()
     for word in words:
