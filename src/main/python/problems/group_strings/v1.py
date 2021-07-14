@@ -1,19 +1,6 @@
 from collections import defaultdict
 from typing import Dict, List
-from data import Trie
-
-
-'''
-def build_trie(words: List[str]):
-    trie = dict()
-    for word in words:
-        cursor = trie
-        for char in word:
-            if char not in cursor:
-                cursor[char] = dict()
-            cursor = cursor[char]
-    return trie
-'''
+from data.tree.trie import Trie
 
 
 def build_trie(words: List[str]) -> Trie[chr]:
@@ -31,8 +18,6 @@ def group_strings(words: List[str]) -> Dict[str, List[str]]:
     trie = build_trie(words)
     groups = defaultdict(list)
     for path in trie.iter_paths():
-        if len(path[-1]) != 0:
-            continue
         end_idx = len(path) - 1
         while len(path[end_idx]) < 2:
             end_idx -= 1

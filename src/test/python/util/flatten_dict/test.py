@@ -1,4 +1,4 @@
-from dict_tools.flatten_dict.v3 import flatten_dict
+from util.flatten_dict import flatten_dict
 import json
 
 test_input = {
