@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 T = TypeVar('T')
 
 
-@dataclass()
+@dataclass
 class Table(Generic[T]):
     width: int
     height: int
@@ -20,9 +20,11 @@ class Table(Generic[T]):
     def traverse(self) -> Iterator[Tuple[int, int, T]]:
         for row_idx in range(self.height):
             for col_idx in range(self.width):
-                yield row_idx, col_idx, self[row_idx][col_idx]
+                yield row_idx, col_idx, self.data[row_idx][col_idx]
 
 
 if __name__ == '__main__':
     matrix: Table[int] = Table(width=4, height=3, default=0)
+    for i in range(10):
+        print(i)
     print(matrix)

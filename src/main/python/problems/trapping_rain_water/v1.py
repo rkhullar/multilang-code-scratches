@@ -1,5 +1,5 @@
 from typing import List
-from table import Table
+from data.table import Table
 
 
 def fill_black(matrix: Table[int], heights: List[int]):
