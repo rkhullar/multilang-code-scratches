@@ -1,22 +1,21 @@
 from typing import List
 
 
+def safe_max(data: list):
+    if data:
+        return max(data)
+
+
 class Solution:
-    def _trap_col(self, heights: List[int], idx: int) -> int:
-        left, right = None, None
-        cursor = idx - 1
-        while not left and cursor >= 0:
-            left = heights[cursor]
-            cursor -= 1
-        cursor = idx + 1
-        while not right and cursor < len(heights):
-            right = heights[cursor]
-            cursor += 1
+    def _trap_col_2(self, heights: List[int], idx: int) -> int:
+        left = safe_max(heights[0:idx])
+        right = safe_max(heights[idx:])
         bounds = min(left or 0, right or 0)
-        return bounds if heights[idx] <= bounds else 0
+        result = bounds - heights[idx] if heights[idx] < bounds else 0
+        return result
 
     def trap(self, height: List[int]) -> int:
-        return sum(self._trap_col(heights=height, idx=i) for i in range(len(height)))
+        return sum(self._trap_col_2(heights=height, idx=i) for i in range(len(height)))
 
 
 if __name__ == '__main__':
