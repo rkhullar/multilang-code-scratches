@@ -36,6 +36,8 @@ def iter_paths(trie: dict) -> Iterator[NodePath]:
             if not last_node.value:
                 yield path[:-1]
 
+        # TODO: revisit for else statement; else will still execute after normal flow of loop
+
 
 def group_strings(words: List[str]) -> Dict[str, List[str]]:
     trie = build_trie(words)

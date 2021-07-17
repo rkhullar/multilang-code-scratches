@@ -7,7 +7,8 @@ def safe_max(data: list):
 
 
 class Solution:
-    def _trap_col_2(self, heights: List[int], idx: int) -> int:
+    @staticmethod
+    def _trap_col(heights: List[int], idx: int) -> int:
         left = safe_max(heights[0:idx])
         right = safe_max(heights[idx:])
         bounds = min(left or 0, right or 0)
@@ -15,7 +16,7 @@ class Solution:
         return result
 
     def trap(self, height: List[int]) -> int:
-        return sum(self._trap_col_2(heights=height, idx=i) for i in range(len(height)))
+        return sum(self._trap_col(heights=height, idx=i) for i in range(len(height)))
 
 
 if __name__ == '__main__':
