@@ -6,8 +6,6 @@ def build_max_arr(data: List[int], reverse: bool = False) -> List[int]:
 
 
 def iter_max_arr(data: List[int], reverse: bool = False) -> Iterator[int]:
-    if not data:
-        pass
     curr = [0, len(data)-1][reverse]
     step = [1, -1][reverse]
     max_idx = curr
@@ -18,25 +16,43 @@ def iter_max_arr(data: List[int], reverse: bool = False) -> Iterator[int]:
         curr += step
 
 
+def safe_get_item(data: list, idx: int):
+    if idx is not None and 0 <= idx < len(data):
+        return data[idx]
+
+
 class Solution:
 
     def trap(self, height: List[int]) -> int:
-        pass
+        left_max_arr = build_max_arr(data=height, reverse=False)
+        right_max_arr = build_max_arr(data=height, reverse=True)
+        right_max_arr.reverse()
+
+        left_max_arr = [None] + left_max_arr[:-1]
+        right_max_arr = right_max_arr[1:] + [None]
+
+        # print(left_max_arr)
+        # print(right_max_arr)
+
+        def partial(idx: int) -> int:
+            left_idx, right_idx = left_max_arr[idx], right_max_arr[idx]
+            left_val, right_val = safe_get_item(height, left_idx), safe_get_item(height, right_idx)
+            bounds = min(left_val or 0, right_val or 0)
+            result = bounds - height[idx] if height[idx] < bounds else 0
+            return result
+
+        return sum(partial(idx) for idx in range(len(height)))
 
 
 if __name__ == '__main__':
-    # height: List[int] = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
-    # result = Solution().trap(height)
-    # assert result == 6, result
-    #
-    height: List[int] = [1,2,3,4,5,4,3,2,0]
-    max_left_arr = build_max_arr(height)
-    max_right_arr = build_max_arr(height, reverse=True)
-    print([height[i] for i in max_left_arr])
-    print([height[i] for i in max_right_arr])
-    # for i in range(len(height)):
-    #     print(f'{i=} left={height[:i]} right={height[i:]} max_left={max_left_arr[i]} max_right={max_right_arr[i]}')
+    height: List[int] = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
+    result = Solution().trap(height)
+    assert result == 6, result
 
-    # result = Solution().trap(height)
-    # assert result == 6, result
+    height: List[int] = [4, 2, 0, 3, 2, 5]
+    result = Solution().trap(height)
+    assert result == 9, result
 
+    height: List[int] = []
+    result = Solution().trap(height)
+    assert result == 0, result
