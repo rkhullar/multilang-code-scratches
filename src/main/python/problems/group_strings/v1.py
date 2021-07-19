@@ -1,5 +1,6 @@
 from collections import defaultdict
 from typing import Dict, List
+
 from data.tree.trie import Trie
 
 

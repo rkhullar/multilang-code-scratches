@@ -1,5 +1,6 @@
-from util.flatten_dict import flatten_dict
 import json
+
+from util.flatten_dict import flatten_dict
 
 test_input = {
     'a': {

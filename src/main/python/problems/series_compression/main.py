@@ -1,7 +1,8 @@
+import unittest
+from typing import Iterator, List, Tuple
+
 from nose.tools import assert_equals
 from parameterized import parameterized
-from typing import Iterator, List, Tuple
-import unittest
 
 IntRange = Tuple[int, int]
 

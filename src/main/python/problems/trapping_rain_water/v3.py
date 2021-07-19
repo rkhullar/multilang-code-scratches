@@ -42,17 +42,3 @@ class Solution:
             return result
 
         return sum(partial(idx) for idx in range(len(height)))
-
-
-if __name__ == '__main__':
-    height: List[int] = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
-    result = Solution().trap(height)
-    assert result == 6, result
-
-    height: List[int] = [4, 2, 0, 3, 2, 5]
-    result = Solution().trap(height)
-    assert result == 9, result
-
-    height: List[int] = []
-    result = Solution().trap(height)
-    assert result == 0, result

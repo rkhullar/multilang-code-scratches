@@ -1,4 +1,5 @@
 from typing import List
+
 from data.table import Table
 
 
@@ -49,8 +50,3 @@ class Solution:
         blue_count = fill_blue(matrix)
         # print(matrix)
         return blue_count
-
-
-if __name__ == '__main__':
-    height: List[int] = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
-    assert Solution().trap(height) == 6

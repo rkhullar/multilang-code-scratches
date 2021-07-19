@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from typing import List, Dict, Union, TypeVar
+from typing import Dict, List, TypeVar, Union
 
 T = TypeVar('T')
 

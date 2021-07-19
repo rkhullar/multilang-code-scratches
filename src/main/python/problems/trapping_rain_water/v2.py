@@ -17,9 +17,3 @@ class Solution:
 
     def trap(self, height: List[int]) -> int:
         return sum(self._trap_col(heights=height, idx=i) for i in range(len(height)))
-
-
-if __name__ == '__main__':
-    height: List[int] = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
-    result = Solution().trap(height)
-    assert result == 6, result
