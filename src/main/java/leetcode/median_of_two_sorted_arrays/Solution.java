@@ -21,8 +21,10 @@ class Solution {
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int[] merged = this.merge(nums1, nums2);
-        for(int i=0; i<merged.length; i++)
-            System.out.println(merged[i]);
-        return 0;
+        int mid_idx = merged.length / 2;
+        if (merged.length % 2 == 1)
+            return merged[mid_idx];
+        else
+            return (merged[mid_idx - 1] + merged[mid_idx]) / 2.0;
     }
 }
