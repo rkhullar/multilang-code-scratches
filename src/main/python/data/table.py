@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Generic, Iterator, List, Tuple, TypeVar
+from typing import Generic, Iterator, TypeVar
 
 T = TypeVar('T')
 
@@ -9,7 +9,7 @@ class Table(Generic[T]):
     width: int
     height: int
     default: T = field(default=None, repr=False)
-    data: List[List[T]] = field(default=None, init=False)
+    data: list[list[T]] = field(default=None, init=False)
 
     def __post_init__(self):
         self.data = [[self.default for _ in range(self.width)] for _ in range(self.height)]
@@ -17,7 +17,7 @@ class Table(Generic[T]):
     def __getitem__(self, item: slice):
         return self.data[item]
 
-    def traverse(self) -> Iterator[Tuple[int, int, T]]:
+    def traverse(self) -> Iterator[tuple[int, int, T]]:
         for row_idx in range(self.height):
             for col_idx in range(self.width):
                 yield row_idx, col_idx, self.data[row_idx][col_idx]

@@ -1,1 +1,1 @@
-from .v3 import flatten_dict
+from .v4 import flatten_dict

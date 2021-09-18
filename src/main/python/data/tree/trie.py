@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Dict, Generic, Iterator, List, Optional, Tuple, TypeVar
+from typing import Generic, Iterator, Optional, TypeVar
 
 T = TypeVar('T')
 
@@ -7,7 +7,7 @@ T = TypeVar('T')
 @dataclass
 class TrieNode(Generic[T]):
     data: T
-    children: Dict[T, 'TrieNode[T]'] = field(default_factory=dict)
+    children: dict[T, 'TrieNode[T]'] = field(default_factory=dict)
     parent: 'TrieNode' = field(default=None, repr=False)
 
     def __contains__(self, child: T) -> bool:
@@ -27,7 +27,7 @@ class TrieNode(Generic[T]):
         return len(self.children)
 
 
-NodePath = Tuple[TrieNode[T], ...]
+NodePath = tuple[TrieNode[T], ...]
 
 
 @dataclass
@@ -52,7 +52,7 @@ class Trie(Generic[T]):
         raise ValueError
 
     def _traverse_bfs(self) -> Iterator[T]:
-        queue: List[TrieNode[T]] = list()
+        queue: list[TrieNode[T]] = list()
         queue.append(self.root)
         while len(queue) > 0:
             node = queue.pop(0)
@@ -60,7 +60,7 @@ class Trie(Generic[T]):
             queue.extend(node.children.values())
 
     def iter_paths(self) -> Iterator[NodePath]:
-        queue: List[NodePath] = [(self.root,)]
+        queue: list[NodePath] = [(self.root,)]
         while len(queue) > 0:
             path: NodePath = queue.pop(0)
             if not path[-1].children:
