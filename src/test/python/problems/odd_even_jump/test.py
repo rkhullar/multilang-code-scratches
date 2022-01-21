@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from nose.tools import assert_equal
 from parameterized import parameterized
-from problems.odd_even_jump.v1 import Solution
+from problems.odd_even_jump.v2 import Solution
 
 
 class SolutionTest(TestCase):
