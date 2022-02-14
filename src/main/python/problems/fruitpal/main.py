@@ -1,9 +1,11 @@
-from fastapi import FastAPI
-import uvicorn
 from decimal import Decimal
+
+import uvicorn
+from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+
 from model import Vendor as VendorInDB
 from schema import Vendor
-from fastapi.encoders import jsonable_encoder
 
 app = FastAPI()
 
