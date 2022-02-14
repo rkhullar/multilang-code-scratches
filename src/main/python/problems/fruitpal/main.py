@@ -1,29 +1,29 @@
 from fastapi import FastAPI
 import uvicorn
-from dataclasses import dataclass
 from decimal import Decimal
+from model import Vendor as VendorInDB
+from schema import Vendor
+from fastapi.encoders import jsonable_encoder
 
 app = FastAPI()
 
 
-@dataclass
-class Vendor:
-    country: str
-    commodity: str
-    variable_overhead: Decimal
-
-    def calculate_purchase_cost(self, unit_price: int, volume: int) -> Decimal:
-        return (unit_price + self.variable_overhead) * volume
-
-
 vendor_database = [
-   Vendor(country='MX', commodity='mango', variable_overhead=Decimal('1.24')),
-   Vendor(country='BZ', commodity='mango', variable_overhead=Decimal('1.42')),
+   VendorInDB(country='MX', commodity='mango', variable_overhead=Decimal('1.24')),
+   VendorInDB(country='BZ', commodity='mango', variable_overhead=Decimal('1.42')),
 ]
 
 
+@app.get('/vendors')
+async def list_vendors() -> list[Vendor]:
+    def iter_vendors():
+        for item in vendor_database:
+            yield jsonable_encoder(Vendor(**item.dict()))
+    return list(iter_vendors())
+
+
 @app.get('/hello')
-def hello():
+async def hello():
     unit_price, volume = 53, 405
     return dict(example=[
         {'country': 'MX', 'price': vendor_database[0].calculate_purchase_cost(unit_price, volume)},
