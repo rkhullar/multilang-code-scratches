@@ -16,17 +16,21 @@ vendor_database = [
 ]
 
 
-@app.get('/vendors')
-async def list_vendors() -> list[Vendor]:
+@app.get('/vendors', response_model=list[Vendor])
+async def list_vendors():
     def iter_vendors():
         for item in vendor_database:
             yield jsonable_encoder(Vendor(**item.dict()))
     return list(iter_vendors())
 
 
-@app.get('/hello')
-async def hello():
-    unit_price, volume = 53, 405
+@app.post('/vendors', response_model=Vendor)
+async def create_vendor(data: Vendor) -> Vendor:
+    return jsonable_encoder(data)
+
+
+@app.get('/estimate')
+async def estimate(unit_price: int, volume: int):
     return dict(example=[
         {'country': 'MX', 'price': vendor_database[0].calculate_purchase_cost(unit_price, volume)},
         {'country': 'BZ', 'price': vendor_database[1].calculate_purchase_cost(unit_price, volume)}
