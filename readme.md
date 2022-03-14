@@ -10,3 +10,6 @@ pip install -U pip setuptools
 pip install pipenv
 pipenv install --dev
 ```
+
+## TODO
+- upgrade to [nose2](https://github.com/nose-devs/nose2) or switch python testing framework
