@@ -12,3 +12,15 @@ Examples:
 - [5,6,7] + [0] => [5,6,7]
 """
 
+from dataclasses import dataclass
+
+
+@dataclass
+class ListNode:
+    data: int
+    next: 'ListNode' = None
+
+
+if __name__ == '__main__':
+    a = ListNode(4, ListNode(0, ListNode(4, ListNode(6))))
+    print(a)
