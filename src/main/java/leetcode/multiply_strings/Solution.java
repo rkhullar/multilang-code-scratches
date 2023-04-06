@@ -2,7 +2,7 @@ package leetcode.multiply_strings;
 
 class BigInteger {
 
-    final byte[] digits;
+    private final byte[] digits;
 
     BigInteger(int size) {
         digits = new byte[size];
@@ -22,7 +22,7 @@ class BigInteger {
         return builder.toString();
     }
 
-    static BigInteger fromString(String number) {
+    public static BigInteger fromString(String number) {
         int size = number.length();
         BigInteger result = new BigInteger(size);
         for(int i=0; i<size; i++) {
@@ -33,15 +33,16 @@ class BigInteger {
         return result;
     }
 
-    BigInteger multiply(BigInteger other) {
+    public BigInteger multiply(BigInteger other) {
         BigInteger[] partial = this.partialMultiply(other);
         BigInteger total = new BigInteger(0);
-        for(BigInteger addend: partial)
+        for(BigInteger addend: partial) {
             total = total.plus(addend);
+        }
         return total;
     }
 
-    BigInteger[] partialMultiply(BigInteger other) {
+    private BigInteger[] partialMultiply(BigInteger other) {
         BigInteger[] result = new BigInteger[other.digits.length];
         int size = other.digits.length;
         for(int i=0; i<size; i++)
@@ -49,7 +50,7 @@ class BigInteger {
         return result;
     }
 
-    BigInteger partialMultiply(byte other_factor, int place) {
+    private BigInteger partialMultiply(byte other_factor, int place) {
         int size = this.digits.length;
         BigInteger result = new BigInteger( size + place + 1);
         byte carry = 0;
@@ -63,8 +64,25 @@ class BigInteger {
         return result;
     }
 
-    BigInteger plus(BigInteger other) {
-        return other;
+    public BigInteger plus(BigInteger other) {
+        int size = Math.max(this.digits.length, other.digits.length);
+        BigInteger result = new BigInteger(size + 1);
+        byte carry = 0;
+        for (int i=0; i<size; i++) {
+            byte a = this.digitAt(size-i-1);
+            byte b = other.digitAt(size-i-1);
+            byte sum = (byte) (a + b + carry);
+            carry = (byte) (sum / 10);
+            result.digits[size-i] = (byte) (sum % 10);
+        }
+        result.digits[0] = carry;
+        return result;
+    }
+
+    private byte digitAt(int index) {
+        if(0 <= index && index < this.digits.length)
+            return this.digits[index];
+        return 0;
     }
 }
 
@@ -80,9 +98,5 @@ class Solution {
         String a = "123", b = "456";
         String product = solution.multiply(a, b);
         System.out.println(product);
-//        BigInteger x = BigInteger.fromString(a);
-//        System.out.println(x);
-//        BigInteger t = x.partialMultiply((byte) 4, 2);
-//        System.out.println(t);
     }
 }
