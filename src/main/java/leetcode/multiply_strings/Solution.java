@@ -34,7 +34,11 @@ class BigInteger {
     }
 
     BigInteger multiply(BigInteger other) {
-        return null;
+        BigInteger[] partial = this.partialMultiply(other);
+        BigInteger total = new BigInteger(0);
+        for(BigInteger addend: partial)
+            total = total.plus(addend);
+        return total;
     }
 
     BigInteger[] partialMultiply(BigInteger other) {
@@ -58,6 +62,10 @@ class BigInteger {
         result.digits[0] = carry;
         return result;
     }
+
+    BigInteger plus(BigInteger other) {
+        return other;
+    }
 }
 
 class Solution {
@@ -68,10 +76,13 @@ class Solution {
     }
 
     public static void main(String[] args) {
+        Solution solution = new Solution();
         String a = "123", b = "456";
-        BigInteger x = BigInteger.fromString(a);
-        System.out.println(x);
-        BigInteger t = x.partialMultiply((byte) 4, 2);
-        System.out.println(t);
+        String product = solution.multiply(a, b);
+        System.out.println(product);
+//        BigInteger x = BigInteger.fromString(a);
+//        System.out.println(x);
+//        BigInteger t = x.partialMultiply((byte) 4, 2);
+//        System.out.println(t);
     }
 }
