@@ -10,8 +10,15 @@ class BigInteger {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for(byte digit: digits)
-            builder.append(digit);
+        boolean wroteFirstDigit = false;
+        for(byte digit: digits) {
+            if(wroteFirstDigit || digit != 0) {
+                builder.append(digit);
+                wroteFirstDigit = true;
+            }
+        }
+        if (!wroteFirstDigit)
+            builder.append(0);
         return builder.toString();
     }
 
@@ -25,16 +32,47 @@ class BigInteger {
         }
         return result;
     }
+
+    BigInteger multiply(BigInteger other) {
+        return null;
+    }
+
+    BigInteger[] partialMultiply(BigInteger other) {
+        BigInteger[] result = new BigInteger[other.digits.length];
+        int size = other.digits.length;
+        for(int i=0; i<size; i++)
+            result[i] = this.partialMultiply(other.digits[size-i-1], i);
+        return result;
+    }
+
+    BigInteger partialMultiply(byte other_factor, int place) {
+        int size = this.digits.length;
+        BigInteger result = new BigInteger( size + place + 1);
+        byte carry = 0;
+        for (int i=0; i<size; i++) {
+            byte this_factor = this.digits[size-i-1];
+            byte product = (byte) (this_factor * other_factor + carry);
+            System.out.printf("product %d index %d\n", product, i);
+            carry = (byte) (product / 10);
+            result.digits[size-i] = (byte) (product % 10);
+        }
+        result.digits[0] = carry;
+        return result;
+    }
 }
 
 class Solution {
     public String multiply(String num1, String num2) {
-        return "";
+        BigInteger a = BigInteger.fromString(num1);
+        BigInteger b = BigInteger.fromString(num2);
+        return a.multiply(b).toString();
     }
 
     public static void main(String[] args) {
         String a = "123", b = "456";
         BigInteger x = BigInteger.fromString(a);
         System.out.println(x);
+        BigInteger t = x.partialMultiply((byte) 4, 2);
+        System.out.println(t);
     }
 }
