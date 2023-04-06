@@ -52,7 +52,6 @@ class BigInteger {
         for (int i=0; i<size; i++) {
             byte this_factor = this.digits[size-i-1];
             byte product = (byte) (this_factor * other_factor + carry);
-            System.out.printf("product %d index %d\n", product, i);
             carry = (byte) (product / 10);
             result.digits[size-i] = (byte) (product % 10);
         }
