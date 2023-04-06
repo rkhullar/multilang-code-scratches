@@ -11,7 +11,7 @@ class BigInteger {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         boolean wroteFirstDigit = false;
-        for(byte digit: digits) {
+        for (byte digit: digits) {
             if(wroteFirstDigit || digit != 0) {
                 builder.append(digit);
                 wroteFirstDigit = true;
@@ -25,7 +25,7 @@ class BigInteger {
     public static BigInteger fromString(String number) {
         int size = number.length();
         BigInteger result = new BigInteger(size);
-        for(int i=0; i<size; i++) {
+        for (int i=0; i<size; i++) {
             char digitAsChar = number.charAt(i);
             byte digit = (byte) Integer.parseInt(digitAsChar+"");
             result.digits[i] = digit;
@@ -34,18 +34,32 @@ class BigInteger {
     }
 
     public BigInteger multiply(BigInteger other) {
+        return this.multiply_v2(other);
+    }
+
+    private BigInteger multiply_v1(BigInteger other) {
         BigInteger[] partial = this.partialMultiply(other);
         BigInteger total = new BigInteger(0);
-        for(BigInteger addend: partial) {
+        for (BigInteger addend: partial)
             total = total.plus(addend);
-        }
         return total;
     }
 
-    private BigInteger[] partialMultiply(BigInteger other) {
-        BigInteger[] result = new BigInteger[other.digits.length];
+    private BigInteger multiply_v2(BigInteger other) {
+        // space optimized
         int size = other.digits.length;
-        for(int i=0; i<size; i++)
+        BigInteger product = new BigInteger(0);
+        for (int i=0; i<other.digits.length; i++) {
+            BigInteger addend = this.partialMultiply(other.digits[size-i-1], i);
+            product = product.plus(addend);
+        }
+        return product;
+    }
+
+    private BigInteger[] partialMultiply(BigInteger other) {
+        int size = other.digits.length;
+        BigInteger[] result = new BigInteger[size];
+        for (int i=0; i<size; i++)
             result[i] = this.partialMultiply(other.digits[size-i-1], i);
         return result;
     }
@@ -80,7 +94,7 @@ class BigInteger {
     }
 
     private byte digitAt(int index) {
-        if(0 <= index && index < this.digits.length)
+        if (0 <= index && index < this.digits.length)
             return this.digits[index];
         return 0;
     }
