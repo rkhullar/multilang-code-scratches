@@ -6,12 +6,6 @@ type BigInteger struct {
 	digits []byte
 }
 
-/*
-func NewBigInteger(size int) *BigInteger {
-	return &BigInteger{make([]byte, size)}
-}
-*/
-
 func ParseBigInteger(number string) *BigInteger {
 	size := len(number)
 	digits := make([]byte, size)
