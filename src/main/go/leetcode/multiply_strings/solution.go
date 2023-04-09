@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -26,10 +25,6 @@ func (this BigInteger) String() string {
 	return sb.String()
 }
 
-//func multiply(num1 string, num2 string) string {
-//
-//}
-
-func main() {
-	fmt.Println(ParseBigInteger("123"))
+func multiply(num1 string, num2 string) string {
+	return ""
 }
