@@ -22,14 +22,14 @@ func ParseBigInteger(number string) *BigInteger {
 
 func (this BigInteger) String() string {
 	var sb strings.Builder
-	wrote_first_digit := false
+	wroteFirstDigit := false
 	for _, digit := range this.digits {
-		if wrote_first_digit || digit != 0 {
+		if wroteFirstDigit || digit != 0 {
 			sb.WriteByte(digit + '0')
-			wrote_first_digit = true
+			wroteFirstDigit = true
 		}
 	}
-	if !wrote_first_digit {
+	if !wroteFirstDigit {
 		sb.WriteByte(0 + '0')
 	}
 	return sb.String()
