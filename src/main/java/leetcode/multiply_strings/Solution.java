@@ -49,7 +49,7 @@ class BigInteger {
         // space optimized
         int size = other.digits.length;
         BigInteger product = new BigInteger(0);
-        for (int i=0; i<other.digits.length; i++) {
+        for (int i=0; i<size; i++) {
             BigInteger addend = this.partialMultiply(other.digits[size-i-1], i);
             product = product.plus(addend);
         }

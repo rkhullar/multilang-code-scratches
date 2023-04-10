@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	a := ParseBigInteger("123")
-	b := ParseBigInteger("456")
-	fmt.Println(a.plus(b))
+	a, b := "123", "456"
+	y := multiply(a, b)
+	fmt.Println(y)
 }

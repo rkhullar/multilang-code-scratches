@@ -35,8 +35,12 @@ func (this BigInteger) String() string {
 	return sb.String()
 }
 
+func (this BigInteger) size() int {
+	return len(this.digits)
+}
+
 func (this BigInteger) plus(other *BigInteger) *BigInteger {
-	size := max(len(this.digits), len(other.digits))
+	size := max(this.size(), other.size())
 	result := NewBigInteger(size + 1)
 	var carry byte = 0
 	for i := 0; i < size; i++ {
@@ -46,6 +50,30 @@ func (this BigInteger) plus(other *BigInteger) *BigInteger {
 		carry = sum / 10
 		result.digits[size-i] = sum % 10
 
+	}
+	result.digits[0] = carry
+	return result
+}
+
+func (this BigInteger) multiply(other *BigInteger) *BigInteger {
+	size := other.size()
+	product := NewBigInteger(0)
+	for i := 0; i < size; i++ {
+		addend := this.partialMultiply(other.digits[size-i-1], i)
+		product = product.plus(addend)
+	}
+	return product
+}
+
+func (this BigInteger) partialMultiply(otherFactor byte, place int) *BigInteger {
+	size := this.size()
+	result := NewBigInteger(size + place + 1)
+	var carry byte = 0
+	for i := 0; i < size; i++ {
+		var thisFactor byte = this.digits[size-i-1]
+		var product = thisFactor*otherFactor + carry
+		carry = product / 10
+		result.digits[size-i] = product % 10
 	}
 	result.digits[0] = carry
 	return result
@@ -68,5 +96,6 @@ func max(a int, b int) int {
 }
 
 func multiply(num1 string, num2 string) string {
-	return ""
+	a, b := ParseBigInteger(num1), ParseBigInteger(num2)
+	return a.multiply(b).String()
 }
