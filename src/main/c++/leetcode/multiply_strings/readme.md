@@ -1,6 +1,10 @@
 ## build and run
 ```shell
-g++ --version
-g++ -o default test_solution.cpp
+g++ -o default test_solution.cpp solution.cpp
 ./default
+```
+
+## check version
+```shell
+g++ --version
 ```
