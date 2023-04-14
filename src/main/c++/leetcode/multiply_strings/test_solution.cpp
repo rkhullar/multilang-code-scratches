@@ -9,6 +9,7 @@ int main()
 
     BigInteger a = BigInteger(3);
     cout << a.size() << endl;
+    cout << a << endl;
 
     return 0;
 }
