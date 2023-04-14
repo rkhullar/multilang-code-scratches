@@ -1,13 +1,14 @@
-typedef unsigned char byte;
+typedef unsigned char digit;
 
 class BigInteger {
 
 private:
-    byte *digits;
+    digit *digits;
+    int _size;
 
 public:
     BigInteger(int size = 0);
-    int length();
+    int size();
 
 //    string to_string() {
 //        return "BI";// + size();
@@ -15,11 +16,12 @@ public:
 };
 
 BigInteger::BigInteger(int size) {
-    this->digits = new byte[size];
+    this->digits = new digit[size];
+    this->_size = size;
 }
 
-int BigInteger::length() {
-    return sizeof(this->digits);
+int BigInteger::size() {
+    return this->_size;
 }
 
 class Solution {
@@ -28,17 +30,3 @@ public:
         return "0";
     }
 };
-
-
-/*
-class BigInt {
-  final private byte[] digits;
-  Person(int size) {
-  this.digits = new byte[size];
-  }
-
-  int size() {
-  return this.digits.length();
-  }
-}
-*/

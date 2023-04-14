@@ -8,7 +8,7 @@ int main()
 //    cout << result << endl;
 
     BigInteger a = BigInteger(3);
-    cout << a.length() << endl;
+    cout << a.size() << endl;
 
     return 0;
 }
