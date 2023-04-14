@@ -13,13 +13,6 @@ public:
 
 BigInteger::BigInteger(int size): digits(size) {};
 
-/*
-BigInteger::BigInteger(int size) {
-    vector<digit> digits(size);
-    this->digits = digits;
-}
-*/
-
 const int BigInteger::size() {
     return this->digits.size();
 }

@@ -36,3 +36,11 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+// scraps
+/*
+BigInteger::BigInteger(int size) {
+    vector<digit> digits(size);
+    this->digits = digits;
+}
+*/
