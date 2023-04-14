@@ -30,9 +30,9 @@ int main(int argc, char *argv[]) {
 //    string result = solution.multiply(a, b);
 //    cout << result << endl;
 
-    BigInteger a = BigInteger(3);
-    cout << a.size() << endl;
-    cout << a << endl;
+    BigInteger::pointer a = BigInteger::from_string("123");
+    cout << a->size() << endl;
+    cout << *a << endl;
 
     return 0;
 }
