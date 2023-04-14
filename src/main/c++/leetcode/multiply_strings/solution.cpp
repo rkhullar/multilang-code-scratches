@@ -30,7 +30,7 @@ const int BigInteger::size() {
     return this->_size;
 }
 
-ostream& operator<<(ostream &out, const BigInteger& self) {
+ostream& operator<<(ostream &out, const BigInteger &self) {
     out << self._size;
     return out;
 }
