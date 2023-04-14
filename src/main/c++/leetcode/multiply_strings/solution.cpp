@@ -3,35 +3,29 @@ typedef unsigned char digit;
 class BigInteger {
 
 private:
-    digit *digits;
-    int _size;
+    vector<digit> digits;
 
 public:
     BigInteger(int size = 0);
-    ~BigInteger();
     const int size();
     friend ostream& operator<<(ostream &, const BigInteger &);
-
-//    string to_string() {
-//        return "BI";// + size();
-//    }
 };
 
-BigInteger::BigInteger(int size) {
-    this->digits = new digit[size];
-    this->_size = size;
-}
+BigInteger::BigInteger(int size): digits(size) {};
 
-BigInteger::~BigInteger() {
-    delete[] this->digits;
+/*
+BigInteger::BigInteger(int size) {
+    vector<digit> digits(size);
+    this->digits = digits;
 }
+*/
 
 const int BigInteger::size() {
-    return this->_size;
+    return this->digits.size();
 }
 
 ostream& operator<<(ostream &out, const BigInteger &self) {
-    out << self._size;
+    out << self.digits.size();
     return out;
 }
 

@@ -34,8 +34,5 @@ int main(int argc, char *argv[]) {
     cout << a.size() << endl;
     cout << a << endl;
 
-//    test_array();
-//    test_vector();
-
     return 0;
 }
