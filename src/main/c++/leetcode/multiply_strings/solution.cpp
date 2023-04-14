@@ -25,7 +25,7 @@ BigInteger::pointer BigInteger::from_string(string number) {
     const int size = number.length();
     BigInteger::pointer result(new BigInteger(size));
     for(int index=0; index < size; index++) {
-        result->digits.at(index) = 1;
+        result->digits.at(index) = 1 + '0';
     }
     return result;
 }
