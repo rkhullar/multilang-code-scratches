@@ -22,12 +22,19 @@ const int BigInteger::size() {
 }
 
 BigInteger::pointer BigInteger::from_string(string number) {
-    BigInteger::pointer result (new BigInteger(5));
+    const int size = number.length();
+    BigInteger::pointer result(new BigInteger(size));
+    for(int index=0; index < size; index++) {
+        result->digits.at(index) = 1;
+    }
     return result;
 }
 
 ostream& operator<<(ostream &out, const BigInteger &self) {
-    out << self.digits.size();
+    const int size = self.digits.size();
+    for(int index=0; index < size; index++) {
+        out << self.digits.at(index);
+    }
     return out;
 }
 
