@@ -7,7 +7,7 @@ build:
 	g++ -o default generated.cpp
 
 test:
-	@./default
+	@./default 6
 
 clean:
 	@rm -rf generated.cpp default
