@@ -58,6 +58,9 @@ BigInteger::pointer operator+(const BigInteger &self, const BigInteger &other) {
 class Solution {
 public:
     string multiply(string num1, string num2) {
+        BigInteger::pointer a = BigInteger::from_string(num1);
+        BigInteger::pointer b = BigInteger::from_string(num2);
+//        return to_string(*a);
         return "0";
     }
 };
