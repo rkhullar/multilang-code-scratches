@@ -38,9 +38,14 @@ int main(int argc, char *argv[]) {
 }
 
 // scraps
-/*
+/* - before delegated constructor
 BigInteger::BigInteger(int size) {
     vector<digit> digits(size);
     this->digits = digits;
 }
+*/
+
+/* - before make_unique
+BigInteger::pointer result(new BigInteger(size));
+return result;
 */
