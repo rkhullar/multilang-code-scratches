@@ -12,6 +12,7 @@ public:
     BigInteger(int size = 0);
     const int size();
     static pointer from_string(string);
+    friend string to_string(const BigInteger &);
     friend ostream& operator<<(ostream &, const BigInteger &);
 };
 
@@ -25,16 +26,22 @@ BigInteger::pointer BigInteger::from_string(string number) {
     const int size = number.length();
     BigInteger::pointer result(new BigInteger(size));
     for(int index=0; index < size; index++) {
-        result->digits.at(index) = 1 + '0';
+        result->digits.at(index) = (digit) (number[index] - '0');
     }
     return result;
 }
 
-ostream& operator<<(ostream &out, const BigInteger &self) {
+string to_string(const BigInteger &self) {
+    stringstream out;
     const int size = self.digits.size();
     for(int index=0; index < size; index++) {
-        out << self.digits.at(index);
+        out << (char) (self.digits.at(index) + '0');
     }
+    return out.str();
+}
+
+ostream& operator<<(ostream &out, const BigInteger &self) {
+    out << to_string(self);
     return out;
 }
 
