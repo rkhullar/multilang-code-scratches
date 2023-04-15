@@ -34,6 +34,8 @@ int main(int argc, char *argv[]) {
     cout << a->size() << endl;
     cout << *a << endl;
 
+    *a + *a;
+
     return 0;
 }
 
