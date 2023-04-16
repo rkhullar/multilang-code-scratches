@@ -91,7 +91,17 @@ BigInteger::pointer operator*(const BigInteger &self, const BigInteger &other) {
 }
 
 BigInteger::pointer BigInteger::partialMultiply(const digit otherFactor, const int place) const {
-    return BigInteger::from_size(0);
+    const int size = this->size();
+    BigInteger::pointer result = BigInteger::from_size(size + place + 1);
+    digit carry = 0;
+    for(int index = 0; index < size; index++) {
+        digit thisFactor = digits.at(size - index - 1);
+        digit product = thisFactor * otherFactor + carry;
+        carry = product / 10;
+        result->digits.at(size - index) = product % 10;
+    }
+    result->digits.at(0) = carry;
+    return result;
 }
 
 class Solution {
@@ -99,7 +109,7 @@ public:
     string multiply(string num1, string num2) {
         BigInteger::pointer a = BigInteger::from_string(num1);
         BigInteger::pointer b = BigInteger::from_string(num2);
-//        return to_string(*a);
-        return "0";
+        BigInteger::pointer product = *a * *b;
+        return to_string(*product);
     }
 };
