@@ -71,7 +71,7 @@ func (this BigInteger) partialMultiply(otherFactor byte, place int) *BigInteger 
 	var carry byte = 0
 	for i := 0; i < size; i++ {
 		var thisFactor byte = this.digits[size-i-1]
-		var product = thisFactor*otherFactor + carry
+		var product byte = thisFactor*otherFactor + carry
 		carry = product / 10
 		result.digits[size-i] = product % 10
 	}
