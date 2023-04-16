@@ -44,8 +44,8 @@ func (this BigInteger) plus(other *BigInteger) *BigInteger {
 	result := NewBigInteger(size + 1)
 	var carry byte = 0
 	for i := 0; i < size; i++ {
-		var a byte = this.digitAt(size - i - 1)
-		var b byte = other.digitAt(size - i - 1)
+		var a byte = this.digitAt(i)
+		var b byte = other.digitAt(i)
 		var sum byte = a + b + carry
 		carry = sum / 10
 		result.digits[size-i] = sum % 10
@@ -80,8 +80,10 @@ func (this BigInteger) partialMultiply(otherFactor byte, place int) *BigInteger 
 }
 
 func (this BigInteger) digitAt(index int) byte {
-	if 0 <= index && index < len(this.digits) {
-		return this.digits[index]
+	// return nth digit from end
+	size := len(this.digits)
+	if 0 <= index && index < size {
+		return this.digits[size-index-1]
 	} else {
 		return 0
 	}
