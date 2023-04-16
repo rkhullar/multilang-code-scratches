@@ -38,10 +38,15 @@ BigInteger::pointer BigInteger::from_string(string number) {
 }
 
 string to_string(const BigInteger &self) {
-    stringstream out;
-    const int size = self.size();
-    for(int index=0; index < size; index++) {
-        out << (char) (self.digits.at(index) + '0');
+    stringstream out; bool wroteFirstDigit = false;
+    for(digit value: self.digits) {
+        if(wroteFirstDigit || value != 0) {
+            out << (char) (value + '0');
+            wroteFirstDigit = true;
+        }
+    }
+    if(!wroteFirstDigit) {
+        out << 0;
     }
     return out.str();
 }
