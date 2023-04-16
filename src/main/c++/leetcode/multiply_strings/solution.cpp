@@ -31,7 +31,7 @@ BigInteger::pointer BigInteger::from_size(int size) {
 BigInteger::pointer BigInteger::from_string(string number) {
     const int size = number.length();
     BigInteger::pointer result = BigInteger::from_size(size);
-    for(int index=0; index < size; index++) {
+    for(int index = 0; index < size; index++) {
         result->digits.at(index) = (digit) (number[index] - '0');
     }
     return result;
@@ -58,25 +58,18 @@ ostream& operator<<(ostream &out, const BigInteger &self) {
 
 BigInteger::pointer operator+(const BigInteger &self, const BigInteger &other) {
     const int size = max(self.size(), other.size());
-    BigInteger::pointer result = BigInteger::from_size(size);
+    BigInteger::pointer result = BigInteger::from_size(size + 1);
+    digit carry = 0;
+    for(int index = 0; index < size; index++) {
+        digit a = self.digits.at(size - index - 1);
+        digit b = other.digits.at(size - index - 1);
+        digit sum = a + b + carry;
+        carry = sum / 10;
+        result->digits.at(size - index) = sum % 10;
+    }
+    result->digits.at(0) = carry;
     return result;
 }
-
-/*
-	size := max(this.size(), other.size())
-	result := NewBigInteger(size + 1)
-	var carry byte = 0
-	for i := 0; i < size; i++ {
-		var a byte = this.digitAt(size - i - 1)
-		var b byte = other.digitAt(size - i - 1)
-		var sum byte = a + b + carry
-		carry = sum / 10
-		result.digits[size-i] = sum % 10
-
-	}
-	result.digits[0] = carry
-	return result
-*/
 
 class Solution {
 public:

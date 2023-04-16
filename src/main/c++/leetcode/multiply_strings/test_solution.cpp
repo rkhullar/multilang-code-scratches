@@ -31,10 +31,12 @@ int main(int argc, char *argv[]) {
 //    cout << result << endl;
 
     BigInteger::pointer a = BigInteger::from_string("123");
-    cout << a->size() << endl;
-    cout << *a << endl;
+    BigInteger::pointer b = BigInteger::from_string("456");
+//    cout << a->size() << endl;
+//    cout << *a << endl;
 
-    *a + *a;
+    BigInteger::pointer c = *a + *b;
+    cout << *c << endl;
 
     return 0;
 }
