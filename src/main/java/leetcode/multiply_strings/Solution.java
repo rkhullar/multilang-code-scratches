@@ -49,7 +49,7 @@ class BigInteger {
         // space optimized
         int size = other.digits.length;
         BigInteger product = new BigInteger(0);
-        for (int i=0; i<other.digits.length; i++) {
+        for (int i=0; i<size; i++) {
             BigInteger addend = this.partialMultiply(other.digits[size-i-1], i);
             product = product.plus(addend);
         }
@@ -83,8 +83,8 @@ class BigInteger {
         BigInteger result = new BigInteger(size + 1);
         byte carry = 0;
         for (int i=0; i<size; i++) {
-            byte a = this.digitAt(size-i-1);
-            byte b = other.digitAt(size-i-1);
+            byte a = this.digitAt(i);
+            byte b = other.digitAt(i);
             byte sum = (byte) (a + b + carry);
             carry = (byte) (sum / 10);
             result.digits[size-i] = (byte) (sum % 10);
@@ -94,8 +94,10 @@ class BigInteger {
     }
 
     private byte digitAt(int index) {
-        if (0 <= index && index < this.digits.length)
-            return this.digits[index];
+        // return nth digit from end
+        final int size = this.digits.length;
+        if (0 <= index && index < size)
+            return this.digits[size - index - 1];
         return 0;
     }
 }
