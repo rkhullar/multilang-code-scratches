@@ -17,6 +17,8 @@ public:
     friend ostream& operator<<(ostream &, const BigInteger &);
     digit operator[](const int) const;
     friend pointer operator+(const BigInteger &, const BigInteger &);
+    friend pointer operator*(const BigInteger &, const BigInteger &);
+    pointer partialMultiply(const digit, const int) const;
 };
 
 BigInteger::BigInteger(int size): digits(size) {};
@@ -76,6 +78,20 @@ BigInteger::pointer operator+(const BigInteger &self, const BigInteger &other) {
     }
     result->digits.at(0) = carry;
     return result;
+}
+
+BigInteger::pointer operator*(const BigInteger &self, const BigInteger &other) {
+    const int size = other.size();
+    BigInteger::pointer product = BigInteger::from_size(0);
+    for(int index = 0; index < size; index++) {
+        BigInteger::pointer addend = self.partialMultiply(other.digits[size - index - 1], index);
+        product = *product + *addend;
+    }
+    return product;
+}
+
+BigInteger::pointer BigInteger::partialMultiply(const digit otherFactor, const int place) const {
+    return BigInteger::from_size(0);
 }
 
 class Solution {
