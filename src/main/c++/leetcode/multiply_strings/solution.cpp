@@ -15,13 +15,14 @@ public:
     static pointer from_string(string);
     friend string to_string(const BigInteger &);
     friend ostream& operator<<(ostream &, const BigInteger &);
+    digit operator[](const int) const;
     friend pointer operator+(const BigInteger &, const BigInteger &);
 };
 
 BigInteger::BigInteger(int size): digits(size) {};
 
 int BigInteger::size() const {
-    return this->digits.size();
+    return digits.size();
 }
 
 BigInteger::pointer BigInteger::from_size(int size) {
@@ -56,13 +57,19 @@ ostream& operator<<(ostream &out, const BigInteger &self) {
     return out;
 }
 
+digit BigInteger::operator[](const int index) const {
+    // return nth digit from end
+    const int n = digits.size();
+    return 0 <= index && index < n ? digits.at(n - index -1) : 0;
+}
+
 BigInteger::pointer operator+(const BigInteger &self, const BigInteger &other) {
     const int size = max(self.size(), other.size());
     BigInteger::pointer result = BigInteger::from_size(size + 1);
     digit carry = 0;
     for(int index = 0; index < size; index++) {
-        digit a = self.digits.at(size - index - 1);
-        digit b = other.digits.at(size - index - 1);
+        digit a = self[index];
+        digit b = other[index];
         digit sum = a + b + carry;
         carry = sum / 10;
         result->digits.at(size - index) = sum % 10;
