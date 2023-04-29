@@ -14,5 +14,5 @@ _free.argtypes = [ctypes.c_void_p]
 
 def hello(message: str) -> str:
     result = _hello(message.encode())
-    _free(result)
-    return result
+    # _free(result)
+    return result.decode()
