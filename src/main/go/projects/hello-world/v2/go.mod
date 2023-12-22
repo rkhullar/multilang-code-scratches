@@ -2,7 +2,11 @@ module main
 
 go 1.21.5
 
-require github.com/gin-gonic/gin v1.9.1
+require (
+	github.com/aws/aws-lambda-go v1.43.0
+	github.com/awslabs/aws-lambda-go-api-proxy v0.16.0
+	github.com/gin-gonic/gin v1.9.1
+)
 
 require (
 	github.com/bytedance/sonic v1.9.1 // indirect
