@@ -33,3 +33,4 @@ go mod tidy
 - https://github.com/aws-samples/sessions-with-aws-sam/tree/master/go-al2
 - https://go.dev/doc/tutorial/web-service-gin
 - https://community.aws/tutorials/golang-and-aws-lambda/02-golang-gin-app-on-aws-lambda
+- https://github.com/gofiber/recipes
