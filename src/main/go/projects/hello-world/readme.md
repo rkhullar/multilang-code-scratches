@@ -1,3 +1,22 @@
+## Milestones
+#### v1
+- [x] create aws lambda with arm64 architecture
+- [x] test manually without apigw integration
+- [x] basic unit test
+
+#### v2
+- [x] adopt gin web framework
+- [x] able to run locally
+- [x] able to deploy to aws with apigw http api integration
+
+#### v3
+- [ ] connect to mongodb cluster
+
+#### TBD
+- [ ] generate openapi docs
+- [ ] request validation
+- [ ] okta/auth0 security
+
 ## Project Setup
 
 #### Hello World
