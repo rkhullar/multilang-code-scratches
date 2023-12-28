@@ -28,6 +28,7 @@ go run .
 
 ```shell
 go get github.com/aws/aws-lambda-go/lambda
+go get go.mongodb.org/mongo-driver/mongo
 ```
 
 ```shell
