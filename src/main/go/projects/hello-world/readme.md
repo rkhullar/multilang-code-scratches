@@ -10,7 +10,7 @@
 - [x] able to deploy to aws with apigw http api integration
 
 #### v3
-- [ ] connect to mongodb cluster
+- [ ] connect to mongodb atlas cluster
 
 #### TBD
 - [ ] generate openapi docs
@@ -29,6 +29,8 @@ go run .
 ```shell
 go get github.com/aws/aws-lambda-go/lambda
 go get go.mongodb.org/mongo-driver/mongo
+go get github.com/aws/aws-sdk-go-v2
+go get github.com/aws/aws-sdk-go-v2/config
 ```
 
 ```shell
@@ -37,6 +39,9 @@ go clean -modcache
 
 # reinstall dependencies
 go mod tidy
+
+# run locally
+go run server.go factory.go
 ```
 
 ##### Lambda Function Config
