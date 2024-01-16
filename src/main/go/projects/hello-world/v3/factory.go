@@ -58,14 +58,20 @@ func BuildAtlasClient(atlasHost string, local bool) *mongo.Client {
 		panic(err)
 	}
 	return client
+	// TODO: implement defer for client disconnection
 }
 
-func FindOneJson(collection *mongo.Collection, filter bson.D) string {
+func FindOne(collection *mongo.Collection, filter bson.D) bson.M {
 	var result bson.M
 	err := collection.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		panic(err)
 	}
+	return result
+}
+
+func FindOneJson(collection *mongo.Collection, filter bson.D) string {
+	result := FindOne(collection, filter)
 	jsonData, err := json.Marshal(result)
 	if err != nil {
 		panic(err)
@@ -73,22 +79,26 @@ func FindOneJson(collection *mongo.Collection, filter bson.D) string {
 	return string(jsonData)
 }
 
+func FindMany(collection *mongo.Collection, filter bson.D) []bson.M {
+	var results []bson.M
+	cursor, err := collection.Find(context.TODO(), filter)
+	if err != nil {
+		panic(err)
+	}
+	err = cursor.All(context.TODO(), &results)
+	if err != nil {
+		panic(err)
+	}
+	return results
+}
+
 var _, localMode = os.LookupEnv("LOCAL_MODE")
 var client = BuildAtlasClient(os.Getenv("ATLAS_HOST"), localMode)
 
 func getMessages(c *gin.Context) {
 	collection := client.Database("default").Collection("message")
-	var result bson.M
-	err := collection.FindOne(context.TODO(), bson.D{{}}).Decode(&result)
-	if err != nil {
-		panic(err)
-	}
-	jsonData, err := json.Marshal(result)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(jsonData)
-	c.IndentedJSON(http.StatusOK, messages)
+	result := FindMany(collection, bson.D{{}})
+	c.IndentedJSON(http.StatusOK, result)
 }
 
 func CreateRouter() *gin.Engine {
