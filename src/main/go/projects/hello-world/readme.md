@@ -10,12 +10,15 @@
 - [x] able to deploy to aws with apigw http api integration
 
 #### v3
-- [ ] connect to mongodb atlas cluster
+- [x] connect to mongodb atlas cluster
+- [x] read all docs in collection
+- [x] response formats to json
 
 #### TBD
-- [ ] generate openapi docs
+- [ ] openapi docs
 - [ ] request validation
 - [ ] okta/auth0 security
+- [ ] handle database disconnect
 
 ## Project Setup
 
