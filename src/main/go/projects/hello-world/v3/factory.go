@@ -60,6 +60,19 @@ func BuildAtlasClient(atlasHost string, local bool) *mongo.Client {
 	return client
 }
 
+func FindOneJson(collection *mongo.Collection, filter bson.D) string {
+	var result bson.M
+	err := collection.FindOne(context.TODO(), filter).Decode(&result)
+	if err != nil {
+		panic(err)
+	}
+	jsonData, err := json.Marshal(result)
+	if err != nil {
+		panic(err)
+	}
+	return string(jsonData)
+}
+
 var _, localMode = os.LookupEnv("LOCAL_MODE")
 var client = BuildAtlasClient(os.Getenv("ATLAS_HOST"), localMode)
 
