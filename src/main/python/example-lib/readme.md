@@ -27,3 +27,4 @@ than c or c++. It should be able to compile for both amd64 and arm64 architectur
 - https://pypi.org/project/cffi
 - https://blog.kchung.co/faster-python-with-go-shared-objects
 - https://cffi.readthedocs.io/en/latest/cdef.html
+- https://last9.io/blog/using-golang-package-in-python-using-gopy
