@@ -1,1 +1,1 @@
-from .wrapper import x
+from .wrapper import check, hello
