@@ -24,3 +24,4 @@ than c or c++. It should be able to compile for both amd64 and arm64 architectur
 - https://dev.to/astagi/extending-python-with-go-1deb
 - https://github.com/go-python/gopy
 - https://pkg.go.dev/cmd/cgo
+- https://pypi.org/project/cffi
