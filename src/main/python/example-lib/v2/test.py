@@ -1,9 +1,5 @@
-# lib = ffi.dlopen(str(path))
+from wrapper import check, hello
 
-# def hello(message: str, count: int):
-#     lib.Hello(ffi.new('char[]'), message.encode(), ffi.new('int', count))
+check()
 
-
-from example import lib, ffi
-
-print(lib)
+hello(message='hello world', count=4)

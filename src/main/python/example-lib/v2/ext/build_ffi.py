@@ -2,7 +2,7 @@ from cffi import FFI
 from pathlib import Path
 
 name = 'libexample'
-path = Path(__file__).parent / 'ext' / 'out'
+path = Path(__file__).parent / 'out'
 shared_object_path, header_path = path / f'{name}.so', path / f'{name}.h'
 
 ffi = FFI()
@@ -14,4 +14,5 @@ extern void Check();
 ''')
 
 if __name__ == '__main__':
-    ffi.compile(verbose=True, tmpdir='ext/out', target='pyexample')
+    #ffi.compile(verbose=True, tmpdir='out', target='pyexample.so')
+    ffi.compile(verbose=True, tmpdir='out')
