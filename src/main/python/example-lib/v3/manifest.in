@@ -1,0 +1,2 @@
+include example/hello.go
+include example/lib/*.so
