@@ -22,7 +22,7 @@ def x():
     print(1)
 
 
-from .lib.pyexample import lib, ffi
+from .pyexample import lib, ffi
 
 
 def check():
