@@ -1,10 +1,14 @@
 ## Objective
-Learn how to create a python library with a go extension. 
+Learn how to create a python library with a go extension.
 
 ### Practical Use Cases
 #### JWT
 Similar to PyJWT create, decode, sign, and verify tokens using RSA. Implementing the core logic in go should be easier
 than c or c++. It should be able to compile for both amd64 and arm64 architectures.
+
+### Tool Versions
+- python 3.12.1
+- golang 1.21.5
 
 ### v1
 - [x] define `hello` function in `util.go`
@@ -52,6 +56,10 @@ similar to v2 except with only one simple go function
 - install requires `cffi`
   - took around 1 minute to install in `docker-test` for `linux/arm64`
   - less than one second for `linux/amd64`
+
+### tbd
+- try c extension without go
+- try gopy
 
 ## Links
 - https://www.ardanlabs.com/blog/2020/07/extending-python-with-go.html
