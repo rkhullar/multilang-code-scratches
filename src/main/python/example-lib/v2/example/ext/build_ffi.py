@@ -3,15 +3,20 @@ from pathlib import Path
 
 name = 'libexample'
 path = Path(__file__).parent / 'out'
-shared_object_path, header_path = path / f'{name}.so', path / f'{name}.h'
+library_path, header_path = path / f'{name}.so', path / f'{name}.h'
 
-ffi = FFI()
+builder = FFI()
 
-ffi.set_source(module_name='pyexample', source=f'#include "{header_path}"', extra_objects=[str(shared_object_path)])
-ffi.cdef('''
+builder.set_source(
+    module_name='pyexample',
+    source=f'#include "{header_path}"',
+    extra_objects=[str(library_path)]
+)
+
+builder.cdef('''
 extern void Hello(char* message, int count);
 extern void Check();
 ''')
 
 if __name__ == '__main__':
-    ffi.compile(verbose=True, tmpdir='out')
+    builder.compile(verbose=True, tmpdir='out')

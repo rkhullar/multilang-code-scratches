@@ -17,7 +17,21 @@ than c or c++. It should be able to compile for both amd64 and arm64 architectur
 - [ ] package into library
 
 ### V2
-- [ ] TBD
+- [x] define core `hello` function in `example.go`
+- [x] define simple cgo `Check` function in `wrapper.go`
+- [x] define cgo `Hello` function in `wrapper.go`
+- [x] compile go code into base library `libexample.so`
+- [x] use `cffi` to create python module extension `pyexample.cpython-{version}-{platform}.so`
+- [x] trust `from pyexample import lib, ffi`
+- [x] define python wrapper functions
+- [x] setup basic package structure
+- [ ] able to install and test wheel file
+
+#### tools
+```shell
+pip install wheel
+pip install cffi
+```
 
 ## Links
 - https://www.ardanlabs.com/blog/2020/07/extending-python-with-go.html
