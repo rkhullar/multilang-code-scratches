@@ -44,6 +44,7 @@ similar to v2 except with only one simple go function
 - [x] include library in `package_data`
 - [x] include source go code in `manifest.in`
 - [x] able to build and test wheel file
+- [x] add second function that accepts a string param
 
 #### caveats
 - wheel file does not have platform or version information
