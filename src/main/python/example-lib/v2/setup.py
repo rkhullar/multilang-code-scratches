@@ -1,7 +1,4 @@
 from setuptools import setup, find_packages
-from pathlib import Path
-
-path = Path(__file__).parent / 'example' / 'ext' / 'out'
 
 setup(
     name='example-lib',
