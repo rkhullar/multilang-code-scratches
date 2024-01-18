@@ -1,11 +1,3 @@
-import sys
-from pathlib import Path
-import os
-sys.path.insert(0, str(Path(__file__).parent / 'lib'))
-print(sys.path)
-print('ld')
-print(os.environ.get('LD_LIBRARY_PATH'))
-
 from pyexample import lib, ffi
 
 
