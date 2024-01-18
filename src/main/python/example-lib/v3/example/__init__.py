@@ -1,1 +1,1 @@
-from .wrapper import hello
+from .wrapper import hello, hello_world

@@ -1,3 +1,4 @@
-from example import hello
+from example import hello,hello_world
 
 hello()
+hello_world(name='Bob')
