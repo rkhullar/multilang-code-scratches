@@ -38,6 +38,8 @@ than c or c++. It should be able to compile for both amd64 and arm64 architectur
 ```shell
 pip install wheel
 pip install cffi
+pip install build
+pip install cibuildwheel
 ```
 
 ### v3
@@ -78,7 +80,6 @@ ls venv/lib/python3.12/site-packages
 ```text
 pyhello.abi3.so cffi_backend.cpython-312-darwin.so cffi/ example/
 ```
-
 
 ### tbd
 - try gopy
