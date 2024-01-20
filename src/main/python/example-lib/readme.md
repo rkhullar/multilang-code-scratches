@@ -57,8 +57,30 @@ similar to v2 except with only one simple go function
   - took around 1 minute to install in `docker-test` for `linux/arm64`
   - less than one second for `linux/amd64`
 
+### v4
+c extension without go
+- [x] define c interface and function in `hello.h` and `hello.c`
+- [x] test core c code with `hello_test.c`
+- [x] create script to compile extension: `build_ffi.py`
+- [x] implement python layer in `wrapper.py`
+- [x] define `cffi_modules` in setuptools
+- [x] able to build and test wheel file
+- [ ] include source c code in distributions
+- [ ] build and test source distribution
+- [ ] how to test without building?
+- [ ] test build in docker for `linux/arm64` and `linux/amd64`
+
+#### caveats
+- post installation `pyhello` is located outside the `example` package
+```shell
+ls venv/lib/python3.12/site-packages
+```
+```text
+pyhello.abi3.so cffi_backend.cpython-312-darwin.so cffi/ example/
+```
+
+
 ### tbd
-- try c extension without go
 - try gopy
 
 ## Links
