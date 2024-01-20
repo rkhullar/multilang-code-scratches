@@ -6,7 +6,7 @@ builder = FFI()
 '''
 builder.set_source(
     module_name='pyhello',
-    source='#include <hello.h>',
+    source='#include "hello.h"',
     sources=['hello.c']
 )
 '''
