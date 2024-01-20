@@ -77,6 +77,7 @@ c extension without go
   - wrap extension import in try catch; call ffi verify on import error
   - https://cffi.readthedocs.io/en/latest/cdef.html
 - [x] test build in docker for `linux/arm64` and `linux/amd64`
+- [ ] test usage in lambda function layer
 
 #### caveats
 - post installation `pyhello` is located outside the `example` package
