@@ -3,14 +3,6 @@ from pathlib import Path
 
 builder = FFI()
 
-'''
-builder.set_source(
-    module_name='pyhello',
-    source='#include "hello.h"',
-    sources=['hello.c']
-)
-'''
-
 path = Path(__file__).parent
 header_path = path / 'hello.h'
 source_path = path / 'hello.c'
