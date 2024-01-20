@@ -76,7 +76,7 @@ c extension without go
 - [x] how to test without building?
   - wrap extension import in try catch; call ffi verify on import error
   - https://cffi.readthedocs.io/en/latest/cdef.html
-- [ ] test build in docker for `linux/arm64` and `linux/amd64`
+- [x] test build in docker for `linux/arm64` and `linux/amd64`
 
 #### caveats
 - post installation `pyhello` is located outside the `example` package
