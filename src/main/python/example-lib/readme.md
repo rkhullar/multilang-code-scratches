@@ -38,6 +38,9 @@ than c or c++. It should be able to compile for both amd64 and arm64 architectur
 ```shell
 pip install wheel
 pip install cffi
+```
+```shell
+# testing tbd
 pip install build
 pip install cibuildwheel
 ```
@@ -67,9 +70,12 @@ c extension without go
 - [x] implement python layer in `wrapper.py`
 - [x] define `cffi_modules` in setuptools
 - [x] able to build and test wheel file
-- [ ] include source c code in distributions
-- [ ] build and test source distribution
-- [ ] how to test without building?
+- [x] include source c code in distributions
+- [x] build and test source distribution
+  - does not compile on installation; at least compiles into `__pycache__` on import
+- [x] how to test without building?
+  - wrap extension import in try catch; call ffi verify on import error
+  - https://cffi.readthedocs.io/en/latest/cdef.html
 - [ ] test build in docker for `linux/arm64` and `linux/amd64`
 
 #### caveats
@@ -83,6 +89,7 @@ pyhello.abi3.so cffi_backend.cpython-312-darwin.so cffi/ example/
 
 ### tbd
 - try gopy
+- try cibuildwheel tool to build for multiple platforms and architectures
 
 ## Links
 - https://www.ardanlabs.com/blog/2020/07/extending-python-with-go.html

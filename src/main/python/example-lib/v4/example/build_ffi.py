@@ -36,4 +36,4 @@ builder.set_source(
 builder.cdef(header_code)
 
 if __name__ == '__main__':
-    builder.compile(verbose=True, tmpdir='out')
+    builder.compile(verbose=True)  # tmpdir='out'
