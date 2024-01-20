@@ -4,5 +4,6 @@ RUN pip install -U pip setuptools
 RUN pip install cffi wheel
 COPY example example/
 COPY setup.py manifest.in ./
-RUN python setup.py bdist_wheel
+RUN mv manifest.in MANIFEST.in
+RUN python setup.py sdist bdist_wheel
 ENTRYPOINT ["/bin/sh"]
