@@ -79,6 +79,7 @@ c extension without go
 - [x] test build in docker for `linux/arm64` and `linux/amd64`
 - [x] test usage in lambda function layer
   - successfully built `package.zip` and tested for both runtime architectures
+- [ ] expand logic with function that accepts params and returns value
 
 #### caveats
 - post installation `pyhello` is located outside the `example` package
