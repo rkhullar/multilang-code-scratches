@@ -39,6 +39,11 @@ than c or c++. It should be able to compile for both amd64 and arm64 architectur
 pip install wheel
 pip install cffi
 ```
+```shell
+# testing tbd
+pip install build
+pip install cibuildwheel
+```
 
 ### v3
 similar to v2 except with only one simple go function
@@ -57,9 +62,37 @@ similar to v2 except with only one simple go function
   - took around 1 minute to install in `docker-test` for `linux/arm64`
   - less than one second for `linux/amd64`
 
-### tbd
-- try c extension without go
+### v4
+c extension without go
+- [x] define c interface and function in `hello.h` and `hello.c`
+- [x] test core c code with `hello_test.c`
+- [x] create script to compile extension: `build_ffi.py`
+- [x] implement python layer in `wrapper.py`
+- [x] define `cffi_modules` in setuptools
+- [x] able to build and test wheel file
+- [x] include source c code in distributions
+- [x] build and test source distribution
+  - does not compile on installation; at least compiles into `__pycache__` on import
+- [x] how to test without building?
+  - wrap extension import in try catch; call ffi verify on import error
+  - https://cffi.readthedocs.io/en/latest/cdef.html
+- [x] test build in docker for `linux/arm64` and `linux/amd64`
+- [x] test usage in lambda function layer
+  - successfully built `package.zip` and tested for both runtime architectures
+- [ ] expand logic with function that accepts params and returns value
+
+#### caveats
+- post installation `pyhello` is located outside the `example` package
+```shell
+ls venv/lib/python3.12/site-packages
+```
+```text
+pyhello.abi3.so cffi_backend.cpython-312-darwin.so cffi/ example/
+```
+
+### TBD
 - try gopy
+- try cibuildwheel tool to build for multiple platforms and architectures
 
 ## Links
 - https://www.ardanlabs.com/blog/2020/07/extending-python-with-go.html
