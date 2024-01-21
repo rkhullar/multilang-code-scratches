@@ -77,7 +77,8 @@ c extension without go
   - wrap extension import in try catch; call ffi verify on import error
   - https://cffi.readthedocs.io/en/latest/cdef.html
 - [x] test build in docker for `linux/arm64` and `linux/amd64`
-- [ ] test usage in lambda function layer
+- [x] test usage in lambda function layer
+  - successfully built `package.zip` and tested for both runtime architectures
 
 #### caveats
 - post installation `pyhello` is located outside the `example` package
@@ -88,7 +89,7 @@ ls venv/lib/python3.12/site-packages
 pyhello.abi3.so cffi_backend.cpython-312-darwin.so cffi/ example/
 ```
 
-### tbd
+### TBD
 - try gopy
 - try cibuildwheel tool to build for multiple platforms and architectures
 
