@@ -33,7 +33,7 @@ def patch_wheel_darwin():
             subprocess.run(command, cwd=dist_path)
 
 
-class CustomBuildWheel(_bdist_wheel):
+class BuildGoWheel(_bdist_wheel):
     def run(self):
         precompile()
         _bdist_wheel.run(self)
@@ -48,5 +48,5 @@ setup(
     include_package_data=True,
     cffi_modules=['example/build_ffi.py:builder'],
     install_requires=['cffi'],
-    cmdclass={'bdist_wheel': CustomBuildWheel}
+    cmdclass={'bdist_wheel': BuildGoWheel}
 )
