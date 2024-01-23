@@ -91,9 +91,48 @@ ls venv/lib/python3.12/site-packages
 pyhello.abi3.so cffi_backend.cpython-312-darwin.so cffi/ example/
 ```
 
-### TBD
-- try gopy
-- try cibuildwheel tool to build for multiple platforms and architectures
+### v5
+- [x] create core logic in `example.go`
+  - [x] passing string and int params
+  - [x] returning strings
+- [x] leverage `cffi` to build the python extension
+- [x] create wrapper functions
+  - [x] use dataclass to simplify `__init__.py`
+  - [x] wrapper functions are static methods
+- [x] able to build and test locally
+  - [x] include source in wheel file
+  - [x] include `libexample.so` in wheel file
+  - [x] automate building `libexample.so` during `python setup.py bdist_wheel`
+    - extend the `bdist_wheel` with custom wrapper and `cmdclass` keyword in `setup`
+    - use `subprocess` to compile the core go code before the normal build steps
+  - [x] avoid having to set `LD_LIBRARY_PATH` on linux after install
+    - `build_ffi.py` includes extra args to set the relative path such that `_example.abi3.so` can locate `libexample.so`
+    - [ ] determine if `extra_compile_args` and `extra_link_args` are needed
+  - [x] avoid having to set `DYLD_LIBRARY_PATH` on macos after install
+    - `setup.py` patches the wheel file in order to update the dependency from `_example.abi3.so` to `libexample.so`
+    - manually this can be done with `otool` for viewing and `install_name_tool` for updating:
+    - `otool -L _example.abi3.so`
+    - `install_name_tool -change libexample.so @loader_path/example/lib/libexample.so _example.abi3.so` 
+- [ ] test install from `sdist`
+- [ ] build wheel files in docker for `linux/arm64` and `linux/amd64`
+- [ ] build lambda function layer `package.zip` archives
+- [ ] test usage in lambda function
+
+#### caveats
+- post installation `_example` is located outside the `example` package
+  - might be possible to move post build, or update `module_name` in `build_ffi.py`
+- not sure if `build_ffi.py` should be included in wheel file
+  - maybe it would be needed for source distributions
+- not sure how to develop the python code without installing
+  - would probably require core go logic to be compiled beforehand
+  - similar to `v4` would need to catch import error and run `lib = ffi.verify`
+
+### Potential Future Work
+- try [gopy](https://github.com/go-python/gopy) or [pybindgen](https://pypi.org/project/PyBindGen)
+- try [setuptools-golang](https://pypi.org/project/setuptools-golang)
+- try [cibuildwheel](https://cibuildwheel.readthedocs.io) for multiple platforms and architectures
+- test on windows
+- expand core logic with go library like [jwt](https://github.com/golang-jwt/jwt)
 
 ## Links
 - https://www.ardanlabs.com/blog/2020/07/extending-python-with-go.html
@@ -105,3 +144,4 @@ pyhello.abi3.so cffi_backend.cpython-312-darwin.so cffi/ example/
 - https://cffi.readthedocs.io/en/latest/cdef.html
 - https://last9.io/blog/using-golang-package-in-python-using-gopy
 - https://www.nestorsag.com/blog/writing-c-extensions-for-python-with-cffi
+- https://itwenty.me/posts/01-understanding-rpath
