@@ -1,8 +1,9 @@
-from setuptools import setup, find_packages
-from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
-from pathlib import Path
 import subprocess
 import sys
+from pathlib import Path
+
+from setuptools import find_packages, setup
+from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
 
 
 def precompile():

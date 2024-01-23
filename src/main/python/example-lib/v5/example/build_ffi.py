@@ -1,7 +1,7 @@
-from cffi import FFI
-from pathlib import Path
 import sys
+from pathlib import Path
 
+from cffi import FFI
 
 path = Path(__file__).parent.absolute() / 'lib'
 header_path = path / 'libexample.h'

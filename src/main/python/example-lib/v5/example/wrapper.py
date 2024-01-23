@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+
 from _example import ffi, lib
 
 
