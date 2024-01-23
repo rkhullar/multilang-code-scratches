@@ -107,7 +107,9 @@ pyhello.abi3.so cffi_backend.cpython-312-darwin.so cffi/ example/
     - use `subprocess` to compile the core go code before the normal build steps
   - [x] avoid having to set `LD_LIBRARY_PATH` on linux after install
     - `build_ffi.py` includes extra args to set the relative path such that `_example.abi3.so` can locate `libexample.so`
-    - [ ] determine if `extra_compile_args` and `extra_link_args` are needed
+    - [x] determine if `extra_compile_args` and `extra_link_args` are needed
+      - only `extra_link_args` is needed
+    - use `ldd _example.abi3.so` to check dependency
   - [x] avoid having to set `DYLD_LIBRARY_PATH` on macos after install
     - `setup.py` patches the wheel file in order to update the dependency from `_example.abi3.so` to `libexample.so`
     - manually this can be done with `otool` for viewing and `install_name_tool` for updating:

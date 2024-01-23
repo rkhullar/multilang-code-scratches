@@ -13,8 +13,7 @@ def build_extra_set_source_args() -> dict[str, list[str]]:
         case 'linux':
             set_rpath = ['-Wl,-rpath=$ORIGIN/example/lib']
             # return dict(extra_compile_args=set_rpath, extra_link_args=set_rpath)
-            # return dict(extra_link_args=set_rpath)
-            return dict()
+            return dict(extra_link_args=set_rpath)
         case 'darwin':
             return dict()
         case _:
