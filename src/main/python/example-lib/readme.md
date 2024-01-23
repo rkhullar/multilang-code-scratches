@@ -113,7 +113,8 @@ pyhello.abi3.so cffi_backend.cpython-312-darwin.so cffi/ example/
     - manually this can be done with `otool` for viewing and `install_name_tool` for updating:
     - `otool -L _example.abi3.so`
     - `install_name_tool -change libexample.so @loader_path/example/lib/libexample.so _example.abi3.so` 
-- [ ] test install from `sdist`
+- [x] test install from `sdist`
+  - no error during install, but did not compile the extension or cgo shared object
 - [ ] build wheel files in docker for `linux/arm64` and `linux/amd64`
 - [ ] build lambda function layer `package.zip` archives
 - [ ] test usage in lambda function

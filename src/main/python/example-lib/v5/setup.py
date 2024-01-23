@@ -8,7 +8,7 @@ from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
 
 def precompile():
     path = Path(__file__).parent.absolute() / 'example'
-    subprocess.run('Make', cwd=path)
+    subprocess.run('make', cwd=path)
 
 
 def find_wheel() -> Path | None:
