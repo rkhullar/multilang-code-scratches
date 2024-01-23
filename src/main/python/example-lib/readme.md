@@ -38,6 +38,7 @@ than c or c++. It should be able to compile for both amd64 and arm64 architectur
 ```shell
 pip install wheel
 pip install cffi
+pip install isort
 ```
 ```shell
 # testing tbd

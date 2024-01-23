@@ -32,6 +32,8 @@ builder.set_source(
 builder.cdef('''
     void Hello();
     void HelloWorld(char* name);
+    void HelloWorldNTimes(char* message, int count);
+    char* Reverse(char* text);
 ''')
 
 

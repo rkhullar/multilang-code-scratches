@@ -16,9 +16,10 @@ class HelloAdapter:
     @staticmethod
     def hello_world_n_times(message: str, count: int = 1):
         params = ffi.new('char[]', message.encode()), ffi.cast('int', count)
-        lib.HelloWorld(*params)
+        lib.HelloWorldNTimes(*params)
 
     @staticmethod
     def reverse(text: str) -> str:
-        r = lib.reverse(ffi.new('char[]', text.encode()))
-        print(r)
+        param = ffi.new('char[]', text.encode())
+        result = lib.Reverse(param)
+        return ffi.string(result).decode()

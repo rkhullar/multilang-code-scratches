@@ -6,3 +6,4 @@ build:
 
 clean:
 	@rm -rf build dist *.egg-info
+	@rm -rf example/local
