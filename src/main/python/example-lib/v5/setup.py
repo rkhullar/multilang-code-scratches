@@ -10,8 +10,24 @@ def precompile():
     subprocess.run('Make', cwd=path)
 
 
+def find_wheel() -> Path | None:
+    dist_path = Path(__file__).parent.absolute() / 'dist'
+    for path in dist_path.glob('*.whl'):
+        return path
+
+
 def patch_wheel_darwin():
-    print('need to patch _example.abi3.so in wheel file')
+    if wheel_path := find_wheel():
+        dist_path = wheel_path.parent
+        to_patch = '_example.abi3.so'
+        commands = [
+            ['unzip', str(wheel_path), to_patch],
+            ['install_name_tool', '-change', 'libexample.so', '@loader_path/example/lib/libexample.so', to_patch],
+            ['otool', '-L', to_patch],
+            ['zip', '-u', str(wheel_path), to_patch]
+        ]
+        for command in commands:
+            subprocess.run(command, cwd=dist_path)
 
 
 class CustomBuildWheel(_bdist_wheel):
