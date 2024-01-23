@@ -24,6 +24,7 @@ def patch_wheel_darwin():
             ['unzip', str(wheel_path), to_patch],
             ['install_name_tool', '-change', 'libexample.so', '@loader_path/example/lib/libexample.so', to_patch],
             ['otool', '-L', to_patch],
+            ['zip', '-d', str(wheel_path), to_patch],
             ['zip', '-u', str(wheel_path), to_patch],
             ['rm', to_patch]
         ]
