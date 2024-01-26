@@ -40,13 +40,34 @@ def solution(floor_plan: list[str]):
         return graph
 
     matrix = _init_matrix()
-    for r in matrix:
-        print(r)
-    # graph = _init_graph()
-    # for node in graph.nodes:
-    #     print(node)
+    graph = _init_graph()
+
+    # helpers in navigation
+    rows = len(matrix)
+    cols = len(matrix[0])
+
+    def _matrix_get(r, c):
+        if (0 <= r < rows) and (0 <= c < cols):
+            return matrix[r][c]
+
+    def _matrix_cell_neighbors(r, c):
+        yield r-1, c  # above
+        yield r+1, c  # below
+        yield r, c+1  # right
+        yield r, c-1  # left
+
+    # determine graph links
+    for node in graph.nodes:
+        if node.state != '#':
+            for r, c in _matrix_cell_neighbors(node.row_idx, node.col_idx):
+                value = _matrix_get(r, c)
+                if value and value != '#':
+                    link_node = GraphNode(row_idx=r, col_idx=c, state=value)
+                    graph.add_link(source=node, target=link_node)
+
+    for node, neighbors in graph.neighbors.items():
+        print(node,neighbors)
 
 
 if __name__ == '__main__':
-    #solution(floor_plan=['.#.*', '..#.'])
-    solution(floor_plan=['ab', 'cd'])
+    solution(floor_plan=['.#.*', '..#.'])
