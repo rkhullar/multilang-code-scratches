@@ -65,9 +65,37 @@ def solution(floor_plan: list[str]):
                     link_node = GraphNode(row_idx=r, col_idx=c, state=value)
                     graph.add_link(source=node, target=link_node)
 
-    for node, neighbors in graph.neighbors.items():
-        print(node,neighbors)
+    # for node, neighbors in graph.neighbors.items():
+    #     print(node, neighbors)
+
+    # search
+    unvisited = {node for node in graph.nodes if node.state != '#'}
+    clusters = list()
+    result = 0
+    while len(unvisited) > 0:
+        cluster, dirty = set(), False
+        start_node = list(unvisited)[0]
+        queue = [start_node]
+        while queue:
+            node = queue.pop(0)
+            unvisited.remove(node)
+            cluster.add(node)
+            dirty |= (node.state == '*')
+            for next_node in graph.neighbors[node]:
+                if next_node in unvisited:
+                    queue.append(next_node)
+        clusters.append(cluster)
+        if dirty:
+            result += 1
+
+    for cluster in clusters:
+        print(cluster)
+
+    return result
 
 
 if __name__ == '__main__':
-    solution(floor_plan=['.#.*', '..#.'])
+    floor_plan = ['.#.*', '..#.']  # 1
+    # floor_plan = ['*#..', '####', '.**.']  # 2
+    result = solution(floor_plan)
+    print(result)
