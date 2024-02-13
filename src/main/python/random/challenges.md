@@ -27,13 +27,13 @@
 ### notes
 - [coderpad](https://coderpad.io)
 - [excalidraw](https://excalidraw.com)
-- file system challenge 1
+- code challenge 1 - file system
   1. `File` class with `write` method
   2. implement `BufferedFile` class
   3. extension: base write method is changed:
      - writes random number of inputted bytes; at least 1
      - returns number of successfully written bytes
-- file system challenge 2
+- code challenge 2 - file system
   - `fs.List` returns array of **absolute** paths within a directory
   - paths are either files or directories
   - `fs.Delete` removes either a single file or an empty directory
@@ -46,3 +46,8 @@
     - reduce memory by shrinking the list while you traverse it
     - reduce memory by only string the relative paths
       - the absolute path can be inferred before calling the next recursive function
+- system design - flight deals
+  - external apis to check price for trip from source to destination for a few platforms
+  - users want to tell the system about their trip, and receive a notification within 10 minutes of a discount
+  - data science team created machine learning model that checks if a trip is discounted
+  - support 10 million users
