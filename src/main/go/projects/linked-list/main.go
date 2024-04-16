@@ -23,7 +23,35 @@ func NewList[T any]() *List[T] {
 }
 
 func (this *List[T]) Push(data T) {
-	fmt.Printf("adding %v to list\n", data)
+	// add to end of list
+	node := NewListNode(data)
+	if this.size < 1 {
+		this.head = node
+		this.tail = node
+	} else {
+		curr := this.tail
+		curr.next = node
+		node.prev = curr
+		this.tail = node
+	}
+	this.size += 1
+}
+
+func (this *List[T]) Pop() T {
+	// remote from end of list
+	fmt.Printf("remove from end of list\n")
+	node := this.tail
+	return node.data
+}
+
+func (this *List[T]) Prepend(data T) {
+	// add to start of list
+	fmt.Printf("add %v to start of list\n", data)
+}
+
+func (this *List[T]) Dequeue() {
+	// remove from start of list
+	fmt.Printf("remove from start of list\n")
 }
 
 func (this *List[T]) String() string {
@@ -42,19 +70,21 @@ func (this *List[T]) toArray() []T {
 
 func main() {
 	dut := NewList[int]()
-	a := NewListNode(1)
-	b := NewListNode(2)
-	c := NewListNode(3)
-	a.next = b
-	b.prev = a
-	b.next = c
-	c.prev = b
-	dut.head = a
-	dut.tail = c
-	dut.size = 3
+	//a := NewListNode(1)
+	//b := NewListNode(2)
+	//c := NewListNode(3)
+	//a.next = b
+	//b.prev = a
+	//b.next = c
+	//c.prev = b
+	//dut.head = a
+	//dut.tail = c
+	//dut.size = 3
 	fmt.Println("Hello world")
 	fmt.Println(dut)
-	dut.Push(7)
-	arr := dut.toArray()
-	fmt.Println(arr)
+	dut.Push(1)
+	dut.Push(2)
+	dut.Push(3)
+	//arr := dut.toArray()
+	//fmt.Println(arr)
 }
