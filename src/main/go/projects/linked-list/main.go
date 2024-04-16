@@ -23,7 +23,7 @@ func NewList[T any]() *List[T] {
 }
 
 func (this *List[T]) Push(data T) {
-	fmt.Printf("adding %v to list", data)
+	fmt.Printf("adding %v to list\n", data)
 }
 
 func (this *List[T]) String() string {
@@ -33,6 +33,11 @@ func (this *List[T]) String() string {
 		curr = curr.next
 	}
 	return "list format"
+}
+
+func (this *List[T]) toArray() []T {
+	arr := make([]T, this.size)
+	return arr
 }
 
 func main() {
@@ -50,4 +55,6 @@ func main() {
 	fmt.Println("Hello world")
 	fmt.Println(dut)
 	dut.Push(7)
+	arr := dut.toArray()
+	fmt.Println(arr)
 }
