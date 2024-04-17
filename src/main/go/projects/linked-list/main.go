@@ -54,10 +54,22 @@ func (this *List[T]) Dequeue() {
 	fmt.Printf("remove from start of list\n")
 }
 
+func (this *List[T]) Iterate() <-chan T {
+	channel := make(chan T)
+	go func() {
+		defer close(channel)
+		curr := this.head
+		for curr != nil {
+			channel <- curr.data
+			curr = curr.next
+		}
+	}()
+	return channel
+}
+
 func (this *List[T]) String() string {
 	curr := this.head
 	for curr != nil {
-		fmt.Println(curr.data)
 		curr = curr.next
 	}
 	return "list format"
@@ -81,10 +93,13 @@ func main() {
 	//dut.tail = c
 	//dut.size = 3
 	fmt.Println("Hello world")
-	fmt.Println(dut)
 	dut.Push(1)
 	dut.Push(2)
 	dut.Push(3)
+	//fmt.Println(dut)
 	//arr := dut.toArray()
 	//fmt.Println(arr)
+	for x := range dut.Iterate() {
+		fmt.Println(x)
+	}
 }
