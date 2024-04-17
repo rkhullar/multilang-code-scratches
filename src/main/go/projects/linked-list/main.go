@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type ListNode[T any] struct {
 	data T
@@ -54,7 +57,20 @@ func (this *List[T]) Dequeue() {
 	fmt.Printf("remove from start of list\n")
 }
 
-func (this *List[T]) Iterate() <-chan T {
+func (this *List[T]) IterNode() <-chan *ListNode[T] {
+	channel := make(chan *ListNode[T])
+	go func() {
+		defer close(channel)
+		curr := this.head
+		for curr != nil {
+			channel <- curr
+			curr = curr.next
+		}
+	}()
+	return channel
+}
+
+func (this *List[T]) IterData() <-chan T {
 	channel := make(chan T)
 	go func() {
 		defer close(channel)
@@ -68,11 +84,18 @@ func (this *List[T]) Iterate() <-chan T {
 }
 
 func (this *List[T]) String() string {
-	curr := this.head
-	for curr != nil {
-		curr = curr.next
+	var builder strings.Builder
+	builder.WriteString("[")
+	for node := range this.IterNode() {
+		separator := ", "
+		if node.next == nil {
+			separator = ""
+		}
+		toWrite := fmt.Sprintf("%v%s", node.data, separator)
+		builder.WriteString(toWrite)
 	}
-	return "list format"
+	builder.WriteString("]")
+	return builder.String()
 }
 
 func (this *List[T]) toArray() []T {
@@ -96,10 +119,7 @@ func main() {
 	dut.Push(1)
 	dut.Push(2)
 	dut.Push(3)
-	//fmt.Println(dut)
+	fmt.Println(dut)
 	//arr := dut.toArray()
 	//fmt.Println(arr)
-	for x := range dut.Iterate() {
-		fmt.Println(x)
-	}
 }
