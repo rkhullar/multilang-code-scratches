@@ -25,6 +25,11 @@ func NewList[T any]() *List[T] {
 	return &List[T]{nil, nil, 0}
 }
 
+func DefaultValue[T any]() T {
+	var value T
+	return value
+}
+
 func (this *List[T]) Push(data T) {
 	// add to end of list
 	node := NewListNode(data)
@@ -43,7 +48,7 @@ func (this *List[T]) Push(data T) {
 func (this *List[T]) Pop() (T, bool) {
 	// remove from end of list
 	if this.size < 1 {
-		return NullValue[T](), false
+		return DefaultValue[T](), false
 	} else {
 		node := this.tail
 		curr := node.prev
@@ -56,11 +61,6 @@ func (this *List[T]) Pop() (T, bool) {
 		this.size -= 1
 		return node.data, true
 	}
-}
-
-func NullValue[T any]() T {
-	var none T
-	return none
 }
 
 func (this *List[T]) Prepend(data T) {
