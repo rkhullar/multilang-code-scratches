@@ -40,11 +40,27 @@ func (this *List[T]) Push(data T) {
 	this.size += 1
 }
 
-func (this *List[T]) Pop() T {
-	// remote from end of list
-	fmt.Printf("remove from end of list\n")
-	node := this.tail
-	return node.data
+func (this *List[T]) Pop() (T, bool) {
+	// remove from end of list
+	if this.size < 1 {
+		return NullValue[T](), false
+	} else {
+		node := this.tail
+		curr := node.prev
+		if curr != nil {
+			curr.next = nil
+		}
+		node.prev = nil
+		node.next = nil
+		this.tail = curr
+		this.size -= 1
+		return node.data, true
+	}
+}
+
+func NullValue[T any]() T {
+	var none T
+	return none
 }
 
 func (this *List[T]) Prepend(data T) {
@@ -87,7 +103,7 @@ func (this *List[T]) String() string {
 	var builder strings.Builder
 	builder.WriteString("[")
 	for node := range this.IterNode() {
-		separator := ", "
+		separator := " "
 		if node.next == nil {
 			separator = ""
 		}
@@ -100,6 +116,11 @@ func (this *List[T]) String() string {
 
 func (this *List[T]) toArray() []T {
 	arr := make([]T, this.size)
+	index := 0
+	for item := range this.IterData() {
+		arr[index] = item
+		index += 1
+	}
 	return arr
 }
 
@@ -115,11 +136,15 @@ func main() {
 	//dut.head = a
 	//dut.tail = c
 	//dut.size = 3
-	fmt.Println("Hello world")
+	fmt.Println("hello world")
 	dut.Push(1)
 	dut.Push(2)
 	dut.Push(3)
+	value, ok := dut.Pop()
+	if ok {
+		fmt.Println(value)
+	}
 	fmt.Println(dut)
-	//arr := dut.toArray()
-	//fmt.Println(arr)
+	arr := dut.toArray()
+	fmt.Println(arr)
 }
