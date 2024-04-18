@@ -18,7 +18,7 @@ func NewListNode[T any](data T) *ListNode[T] {
 type List[T any] struct {
 	head *ListNode[T]
 	tail *ListNode[T]
-	size uint
+	size int
 }
 
 func NewList[T any]() *List[T] {
@@ -144,29 +144,4 @@ func (this *List[T]) toArray() []T {
 		index += 1
 	}
 	return arr
-}
-
-func main() {
-	dut := NewList[int]()
-	//a := NewListNode(1)
-	//b := NewListNode(2)
-	//c := NewListNode(3)
-	//a.next = b
-	//b.prev = a
-	//b.next = c
-	//c.prev = b
-	//dut.head = a
-	//dut.tail = c
-	//dut.size = 3
-	fmt.Println("hello world")
-	dut.Push(1)
-	dut.Push(2)
-	dut.Push(3)
-	value, ok := dut.Pop()
-	if ok {
-		fmt.Println(value)
-	}
-	fmt.Println(dut)
-	arr := dut.toArray()
-	fmt.Println(arr)
 }
