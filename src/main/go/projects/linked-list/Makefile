@@ -1,5 +1,5 @@
 build: clean
-	go build -buildmode=c-shared -o local/libcore.so main.go
+	go build -buildmode=c-shared -o local/liblinkedlist.so core.go
 
 clean:
 	@rm -rf local _obj

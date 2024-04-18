@@ -1,4 +1,4 @@
-module main
+module github.com/rkhullar/python-java-scratches/src/main/go/projects/linked-list
 
 go 1.21.8
 
