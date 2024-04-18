@@ -65,12 +65,34 @@ func (this *List[T]) Pop() (T, bool) {
 
 func (this *List[T]) Prepend(data T) {
 	// add to start of list
-	fmt.Printf("add %v to start of list\n", data)
+	node := NewListNode(data)
+	if this.size < 1 {
+		this.head = node
+		this.tail = node
+	} else {
+		node.next = this.head
+		this.head.prev = node
+		this.head = node
+	}
+	this.size += 1
 }
 
-func (this *List[T]) Dequeue() {
+func (this *List[T]) Dequeue() (T, bool) {
 	// remove from start of list
-	fmt.Printf("remove from start of list\n")
+	if this.size < 1 {
+		return DefaultValue[T](), false
+	} else {
+		node := this.head
+		curr := node.next
+		if curr != nil {
+			curr.prev = nil
+		}
+		node.prev = nil
+		node.next = nil
+		this.head = curr
+		this.size -= 1
+		return node.data, true
+	}
 }
 
 func (this *List[T]) IterNode() <-chan *ListNode[T] {
