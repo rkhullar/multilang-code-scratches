@@ -1,13 +1,7 @@
-build: clean
-	go build -buildmode=c-shared -o local/liblinkedlist.so core.go
-
-clean:
-	@rm -rf local _obj
-
-test: clean
+test:
 	@go test
 
-reset: clean
+reset:
 	@rm -f go.sum
 	@go clean -modcache # remove download modules
 	@go mod tidy # reinstall dependencies
