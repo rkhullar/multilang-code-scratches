@@ -1,8 +1,10 @@
-import httpx
-from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from type_util import T, BuildResponseCallable, HandleResponseCallable, SyncAsyncCallable, SyncAsync
+from dataclasses import dataclass
 
+import httpx
+
+from type_util import (BuildResponseCallable, HandleResponseCallable,
+                       SyncAsync, SyncAsyncCallable, T)
 
 
 @dataclass

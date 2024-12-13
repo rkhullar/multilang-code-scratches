@@ -1,6 +1,6 @@
-from typing import Awaitable, TypeVar, Callable
-import httpx
+from typing import Awaitable, Callable, TypeVar
 
+import httpx
 
 T = TypeVar('T')
 SyncAsync = T | Awaitable[T]

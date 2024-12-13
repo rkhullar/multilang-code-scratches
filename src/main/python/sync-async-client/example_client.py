@@ -1,7 +1,9 @@
 from dataclasses import dataclass
+
+import httpx
+
 from base_client import AbstractBaseClient
 from type_util import SyncAsync
-import httpx
 
 
 @dataclass
