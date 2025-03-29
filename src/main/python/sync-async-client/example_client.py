@@ -3,27 +3,8 @@ from dataclasses import dataclass
 import httpx
 
 from base_client import AbstractBaseClient
+from sync_async_util import sync_async
 from type_util import SyncAsync
-
-import functools
-
-
-def sync_async(fn):
-    @functools.wraps(fn)
-    def decorator(self: AbstractBaseClient, *args, **kwargs):
-        if self.enable_async:
-            async def wrapper():
-                generator = fn(self, *args, **kwargs)
-                response = await next(generator)
-                generator = fn(self, *args, response=response, **kwargs)
-                return next(generator)
-        else:
-            def wrapper():
-                generator = fn(self, *args, **kwargs)
-                response = next(generator)
-                return fn(self, *args, response=response, **kwargs)
-        return wrapper()
-    return decorator
 
 
 @dataclass

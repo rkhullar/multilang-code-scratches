@@ -3,8 +3,7 @@ from dataclasses import dataclass
 
 import httpx
 
-from type_util import (BuildResponseCallable, HandleResponseCallable,
-                       SyncAsync, SyncAsyncCallable, T)
+from type_util import BuildResponseCallable, HandleResponseCallable, SyncAsync, SyncAsyncCallable, T
 
 
 @dataclass
