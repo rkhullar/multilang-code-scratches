@@ -25,8 +25,9 @@ class ExampleClient(AbstractBaseClient):
         )
 
     @sync_async
-    def read_pets_v2(self, response: httpx.Response = None):
+    def read_pets_v2(self, response: httpx.Response = None) -> SyncAsync[list[dict]]:
+        # NOTE: was originally trying with context manager style generator, but landed on two-phased function call
         if not response:
-            yield self.send_request(method='get', url='/petstore/pets')
+            return self.send_request(method='get', url='/petstore/pets')
         response.raise_for_status()
         return response.json()
