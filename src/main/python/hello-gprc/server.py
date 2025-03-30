@@ -1,9 +1,9 @@
 import asyncio
 import logging
-
+import os
 import grpc
-import example_pb2
-import example_pb2_grpc
+
+from protos.generated import example_pb2, example_pb2_grpc
 
 
 class Greeter(example_pb2_grpc.GreeterServicer):
@@ -12,11 +12,13 @@ class Greeter(example_pb2_grpc.GreeterServicer):
 
 
 async def serve() -> None:
+    server_host = os.environ.get('SERVER_HOST', '[::]')
+    server_port = int(os.environ.get('SERVER_PORT', '50051'))
     server = grpc.aio.server()
     example_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
-    listen_addr = "[::]:50051"
+    listen_addr = f'{server_host}:{server_port}'
     server.add_insecure_port(listen_addr)
-    logging.info("Starting server on %s", listen_addr)
+    logging.info("starting server on %s", listen_addr)
     await server.start()
     await server.wait_for_termination()
 
