@@ -1,8 +1,12 @@
 import asyncio
 import logging
 import os
+
 import grpc
 
+from patch import patch_path
+
+patch_path()
 from protos.generated import example_pb2, example_pb2_grpc
 
 
@@ -25,4 +29,5 @@ async def serve() -> None:
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
+    patch_path()
     asyncio.run(serve())
