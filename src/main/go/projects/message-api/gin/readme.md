@@ -1,6 +1,6 @@
 ## First Time Setup
-
 ```shell
+asdf set golang 1.24.2
 go mod init main
 ```
 
@@ -17,4 +17,9 @@ go clean -modcache
 
 # reinstall dependencies
 go mod tidy
+```
+
+## Running Locally
+```shell
+go run main.go
 ```
