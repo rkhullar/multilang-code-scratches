@@ -1,8 +1,20 @@
+## First Time Setup
+
 ```shell
-go get github.com/gin-gonic/gin
-go get github.com/swaggo/swag/cmd/swag
+go mod init main
 ```
 
 ```shell
+go get github.com/gin-gonic/gin
 go get github.com/swaggo/swag/cmd/swag
+go get github.com/google/uuid
+```
+
+## Regen Requirements
+```shell
+# remove download modules
+go clean -modcache
+
+# reinstall dependencies
+go mod tidy
 ```
