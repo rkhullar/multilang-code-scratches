@@ -113,8 +113,6 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "Simple API for storing and retrieving messages.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
 }
 
 func init() {

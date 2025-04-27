@@ -10,8 +10,13 @@ go get github.com/swaggo/swag/cmd/swag
 go get github.com/google/uuid
 ```
 
+
+## Generating Docs
 ```shell
 go install github.com/swaggo/swag/cmd/swag@latest
+```
+```shell
+swag init
 ```
 
 ## Regen Requirements
