@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    image: message-api-goa
+    platform: linux/amd64
+    container_name: message-api-goa
+    ports:
+      - "8080:8080"
