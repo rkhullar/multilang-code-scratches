@@ -32,3 +32,6 @@ go mod tidy
 ```shell
 go run main.go
 ```
+
+## OpenAPI Docs
+- http://localhost:8080/swagger/index.html

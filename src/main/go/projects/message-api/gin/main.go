@@ -15,7 +15,7 @@ import (
 // @BasePath /
 func main() {
 	r := gin.Default()
-	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.POST("/messages", handlers.CreateMessage)
 	r.GET("/messages", handlers.ListMessages)
 	r.GET("/messages/:id", handlers.ReadMessage)
