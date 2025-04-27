@@ -18,5 +18,14 @@ goa example github.com/rkhullar/python-java-scratches/src/main/go/projects/messa
 go run github.com/rkhullar/python-java-scratches/src/main/go/projects/message-api/goa/cmd/message --http-port=8080
 ```
 
+## Regen Requirements
+```shell
+# remove download modules
+go clean -modcache
+
+# reinstall dependencies
+go mod tidy
+```
+
 ## Reference
 - https://goa.design/docs/2-getting-started

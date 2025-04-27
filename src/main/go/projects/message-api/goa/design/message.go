@@ -43,3 +43,16 @@ var _ = Service("message", func() {
 		})
 	})
 })
+
+var CustomMessage = ResultType("application/vnd.message+json", func() {
+	TypeName("Message")
+	Attributes(func() {
+		Attribute("id", String, "UUID of the message")
+		Attribute("text", String, "Message text")
+		Required("id", "text")
+	})
+	View("default", func() {
+		Attribute("id")
+		Attribute("text")
+	})
+})
