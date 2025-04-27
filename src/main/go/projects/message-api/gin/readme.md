@@ -1,7 +1,7 @@
 ## First Time Setup
 ```shell
 asdf set golang 1.24.2
-go mod init main
+go mod init main # rename afterwards
 ```
 
 ```shell
