@@ -14,7 +14,7 @@ var _ = Service("message", func() {
 			})
 			Required("text")
 		})
-		Result(Message)
+		Result(CustomMessage)
 		HTTP(func() {
 			POST("/messages")
 			Response(StatusCreated)
@@ -22,7 +22,7 @@ var _ = Service("message", func() {
 	})
 
 	Method("list", func() {
-		Result(ArrayOf(Message))
+		Result(ArrayOf(CustomMessage))
 		HTTP(func() {
 			GET("/messages")
 			Response(StatusOK)
@@ -34,7 +34,8 @@ var _ = Service("message", func() {
 			Field(1, "id", String, "UUID of the message")
 			Required("id")
 		})
-		Result(Message)
+		Result(CustomMessage)
+		Error("not_found", NotFoundError)
 		HTTP(func() {
 			GET("/messages/{id}")
 			Response(StatusOK)
@@ -42,18 +43,3 @@ var _ = Service("message", func() {
 		})
 	})
 })
-
-/*
-var Message = ResultType("application/vnd.message+json", func() {
-	TypeName("Message")
-	Attributes(func() {
-		Attribute("id", String, "UUID of the message")
-		Attribute("text", String, "Message text")
-		Required("id", "text")
-	})
-	View("default", func() {
-		Attribute("id")
-		Attribute("text")
-	})
-})
-*/
