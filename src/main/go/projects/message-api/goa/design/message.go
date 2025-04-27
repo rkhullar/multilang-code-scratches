@@ -5,7 +5,7 @@ import (
 )
 
 var _ = Service("message", func() {
-	Description("The message service")
+	Description("simple message service")
 
 	Method("create", func() {
 		Payload(func() {
@@ -43,6 +43,7 @@ var _ = Service("message", func() {
 	})
 })
 
+/*
 var Message = ResultType("application/vnd.message+json", func() {
 	TypeName("Message")
 	Attributes(func() {
@@ -55,3 +56,4 @@ var Message = ResultType("application/vnd.message+json", func() {
 		Attribute("text")
 	})
 })
+*/
