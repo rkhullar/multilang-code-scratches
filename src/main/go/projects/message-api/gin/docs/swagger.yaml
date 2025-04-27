@@ -1,5 +1,13 @@
 basePath: /
 definitions:
+  models.CreateMessage:
+    properties:
+      text:
+        minLength: 1
+        type: string
+    required:
+    - text
+    type: object
   models.Message:
     properties:
       id:
@@ -35,7 +43,7 @@ paths:
         name: message
         required: true
         schema:
-          $ref: '#/definitions/models.Message'
+          $ref: '#/definitions/models.CreateMessage'
       produces:
       - application/json
       responses:

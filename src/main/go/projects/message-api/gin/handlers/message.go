@@ -17,7 +17,7 @@ var (
 // @Summary create message
 // @Accept json
 // @Produce json
-// @Param message body models.Message true "Message to create"
+// @Param message body models.CreateMessage true "Message to create"
 // @Success 201 {object} models.Message
 // @Router /messages [post]
 func CreateMessage(c *gin.Context) {

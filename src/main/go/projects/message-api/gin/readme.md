@@ -35,3 +35,8 @@ go run main.go
 
 ## OpenAPI Docs
 - http://localhost:8080/swagger/index.html
+
+#### Other
+- swag init issue with left and right delim
+  - https://github.com/swaggo/swag/issues/1568
+  - `go get -u github.com/swaggo/swag`

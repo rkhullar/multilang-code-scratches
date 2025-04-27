@@ -48,7 +48,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Message"
+                            "$ref": "#/definitions/models.CreateMessage"
                         }
                     }
                 ],
@@ -89,6 +89,18 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "models.CreateMessage": {
+            "type": "object",
+            "required": [
+                "text"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        },
         "models.Message": {
             "type": "object",
             "properties": {
@@ -113,6 +125,8 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "Simple API for storing and retrieving messages.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
+	LeftDelim:        "{{",
+	RightDelim:       "}}",
 }
 
 func init() {

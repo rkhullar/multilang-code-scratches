@@ -42,7 +42,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Message"
+                            "$ref": "#/definitions/models.CreateMessage"
                         }
                     }
                 ],
@@ -83,6 +83,18 @@
         }
     },
     "definitions": {
+        "models.CreateMessage": {
+            "type": "object",
+            "required": [
+                "text"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        },
         "models.Message": {
             "type": "object",
             "properties": {
