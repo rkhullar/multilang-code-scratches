@@ -54,7 +54,6 @@ func ListMessages(c *gin.Context) {
 // @Produce json
 // @Param id path string true "Message ID"
 // @Success 200 {object} models.Message
-// @Failure 404 {object} gin.H
 // @Router /messages/{id} [get]
 func ReadMessage(c *gin.Context) {
 	id := c.Param("id")
