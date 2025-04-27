@@ -42,7 +42,8 @@ func CreateMessage(c *gin.Context) {
 func ListMessages(c *gin.Context) {
 	mu.RLock()
 	defer mu.RUnlock()
-	var result []models.Message
+	//var result []models.Message
+	result := make([]models.Message, 0) // added to return empty list over null if message is empty
 	for _, m := range messages {
 		result = append(result, m)
 	}
