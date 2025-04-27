@@ -10,6 +10,10 @@ go get github.com/swaggo/swag/cmd/swag
 go get github.com/google/uuid
 ```
 
+```shell
+go install github.com/swaggo/swag/cmd/swag@latest
+```
+
 ## Regen Requirements
 ```shell
 # remove download modules

@@ -2,56 +2,21 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
-	"github.com/rkhullar/python-java-scratches/src/main/go/projects/message-api/gin/models"
-	"net/http"
-	"sync"
+	"github.com/rkhullar/python-java-scratches/src/main/go/projects/message-api/gin/handlers"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-var messages = make(map[string]models.Message)
-var mu sync.Mutex
-
+// @title Message API
+// @version 1.0
+// @description Simple API for storing and retrieving messages.
+// @host localhost:8080
+// @BasePath /
 func main() {
 	r := gin.Default()
-
-	// Create message
-	r.POST("/messages", func(c *gin.Context) {
-		var req models.GreetRequest
-		if err := c.ShouldBindJSON(&req); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
-		}
-		id := uuid.New().String()
-		msg := models.Message{ID: id, Text: req.Text}
-		mu.Lock()
-		messages[id] = msg
-		mu.Unlock()
-		c.JSON(http.StatusCreated, msg)
-	})
-
-	// List messages
-	r.GET("/messages", func(c *gin.Context) {
-		mu.Lock()
-		var result []models.Message
-		for _, m := range messages {
-			result = append(result, m)
-		}
-		mu.Unlock()
-		c.JSON(http.StatusOK, result)
-	})
-
-	// Read message by ID
-	r.GET("/messages/:id", func(c *gin.Context) {
-		id := c.Param("id")
-		mu.Lock()
-		msg, ok := messages[id]
-		mu.Unlock()
-		if !ok {
-			c.JSON(http.StatusNotFound, gin.H{"error": "Message not found"})
-			return
-		}
-		c.JSON(http.StatusOK, msg)
-	})
-
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.POST("/messages", handlers.CreateMessage)
+	r.GET("/messages", handlers.ListMessages)
+	r.GET("/messages/:id", handlers.ReadMessage)
 	r.Run(":8080")
 }
