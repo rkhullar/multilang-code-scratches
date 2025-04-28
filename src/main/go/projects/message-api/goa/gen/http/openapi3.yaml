@@ -1,10 +1,11 @@
 openapi: 3.0.3
 info:
-    title: Goa API
+    title: simple message service
+    description: hello world http service for managing messages
     version: 0.0.1
 servers:
-    - url: http://localhost:80
-      description: Default server for message
+    - url: http://localhost:8080/message
+      description: hosts the message service
 paths:
     /messages:
         get:
@@ -92,6 +93,15 @@ paths:
                                 $ref: '#/components/schemas/NotFoundError'
                             example:
                                 message: Et nam dolor repellat unde nihil voluptas.
+    /openapi.json:
+        get:
+            tags:
+                - message
+            summary: Download gen/http/openapi3.json
+            operationId: message#/openapi.json
+            responses:
+                "200":
+                    description: File downloaded
 components:
     schemas:
         CreateRequestBody:

@@ -1,8 +1,9 @@
 swagger: "2.0"
 info:
-    title: ""
+    title: simple message service
+    description: hello world http service for managing messages
     version: 0.0.1
-host: localhost:80
+host: localhost:8080
 consumes:
     - application/json
     - application/xml
@@ -70,6 +71,19 @@ paths:
                         $ref: '#/definitions/NotFoundError'
                         required:
                             - message
+            schemes:
+                - http
+    /openapi.json:
+        get:
+            tags:
+                - message
+            summary: Download gen/http/openapi3.json
+            operationId: message#/openapi.json
+            responses:
+                "200":
+                    description: File downloaded
+                    schema:
+                        type: file
             schemes:
                 - http
 definitions:

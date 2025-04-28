@@ -49,7 +49,7 @@ func handleHTTPServer(ctx context.Context, u *url.URL, messageEndpoints *message
 	)
 	{
 		eh := errorHandler(ctx)
-		messageServer = messagesvr.New(messageEndpoints, mux, dec, enc, eh, nil)
+		messageServer = messagesvr.New(messageEndpoints, mux, dec, enc, eh, nil, nil)
 	}
 
 	// Configure the mux.

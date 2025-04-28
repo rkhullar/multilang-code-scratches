@@ -29,3 +29,4 @@ go mod tidy
 
 ## Reference
 - https://goa.design/docs/2-getting-started
+- https://github.com/goadesign/examples/blob/master/basic

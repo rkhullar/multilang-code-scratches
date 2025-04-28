@@ -4,6 +4,19 @@ import (
 	. "goa.design/goa/v3/dsl"
 )
 
+var _ = API("message", func() {
+	Title("simple message service")
+	Description("hello world http service for managing messages")
+	Server("message", func() {
+		Description("hosts the message service")
+		Services("message")
+		Host("development", func() {
+			Description("development hosts")
+			URI("http://localhost:8080/message")
+		})
+	})
+})
+
 var _ = Service("message", func() {
 	Description("simple message service")
 
@@ -42,6 +55,8 @@ var _ = Service("message", func() {
 			Response("not_found", StatusNotFound)
 		})
 	})
+
+	Files("/openapi.json", "gen/http/openapi3.json")
 })
 
 var CustomMessage = ResultType("application/vnd.message+json", func() {

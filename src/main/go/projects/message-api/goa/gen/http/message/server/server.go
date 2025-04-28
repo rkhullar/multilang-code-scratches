@@ -11,6 +11,7 @@ package server
 import (
 	"context"
 	"net/http"
+	"path"
 
 	message "github.com/rkhullar/python-java-scratches/src/main/go/projects/message-api/goa/gen/message"
 	goahttp "goa.design/goa/v3/http"
@@ -19,10 +20,11 @@ import (
 
 // Server lists the message service endpoint HTTP handlers.
 type Server struct {
-	Mounts []*MountPoint
-	Create http.Handler
-	List   http.Handler
-	Read   http.Handler
+	Mounts              []*MountPoint
+	Create              http.Handler
+	List                http.Handler
+	Read                http.Handler
+	GenHTTPOpenapi3JSON http.Handler
 }
 
 // MountPoint holds information about the mounted endpoints.
@@ -49,16 +51,23 @@ func New(
 	encoder func(context.Context, http.ResponseWriter) goahttp.Encoder,
 	errhandler func(context.Context, http.ResponseWriter, error),
 	formatter func(ctx context.Context, err error) goahttp.Statuser,
+	fileSystemGenHTTPOpenapi3JSON http.FileSystem,
 ) *Server {
+	if fileSystemGenHTTPOpenapi3JSON == nil {
+		fileSystemGenHTTPOpenapi3JSON = http.Dir(".")
+	}
+	fileSystemGenHTTPOpenapi3JSON = appendPrefix(fileSystemGenHTTPOpenapi3JSON, "/gen/http")
 	return &Server{
 		Mounts: []*MountPoint{
 			{"Create", "POST", "/messages"},
 			{"List", "GET", "/messages"},
 			{"Read", "GET", "/messages/{id}"},
+			{"Serve gen/http/openapi3.json", "GET", "/openapi.json"},
 		},
-		Create: NewCreateHandler(e.Create, mux, decoder, encoder, errhandler, formatter),
-		List:   NewListHandler(e.List, mux, decoder, encoder, errhandler, formatter),
-		Read:   NewReadHandler(e.Read, mux, decoder, encoder, errhandler, formatter),
+		Create:              NewCreateHandler(e.Create, mux, decoder, encoder, errhandler, formatter),
+		List:                NewListHandler(e.List, mux, decoder, encoder, errhandler, formatter),
+		Read:                NewReadHandler(e.Read, mux, decoder, encoder, errhandler, formatter),
+		GenHTTPOpenapi3JSON: http.FileServer(fileSystemGenHTTPOpenapi3JSON),
 	}
 }
 
@@ -80,6 +89,7 @@ func Mount(mux goahttp.Muxer, h *Server) {
 	MountCreateHandler(mux, h.Create)
 	MountListHandler(mux, h.List)
 	MountReadHandler(mux, h.Read)
+	MountGenHTTPOpenapi3JSON(mux, h.GenHTTPOpenapi3JSON)
 }
 
 // Mount configures the mux to serve the message endpoints.
@@ -231,4 +241,33 @@ func NewReadHandler(
 			errhandler(ctx, w, err)
 		}
 	})
+}
+
+// appendFS is a custom implementation of fs.FS that appends a specified prefix
+// to the file paths before delegating the Open call to the underlying fs.FS.
+type appendFS struct {
+	prefix string
+	fs     http.FileSystem
+}
+
+// Open opens the named file, appending the prefix to the file path before
+// passing it to the underlying fs.FS.
+func (s appendFS) Open(name string) (http.File, error) {
+	switch name {
+	case "/openapi.json":
+		name = "/openapi3.json"
+	}
+	return s.fs.Open(path.Join(s.prefix, name))
+}
+
+// appendPrefix returns a new fs.FS that appends the specified prefix to file paths
+// before delegating to the provided embed.FS.
+func appendPrefix(fsys http.FileSystem, prefix string) http.FileSystem {
+	return appendFS{prefix: prefix, fs: fsys}
+}
+
+// MountGenHTTPOpenapi3JSON configures the mux to serve GET request made to
+// "/openapi.json".
+func MountGenHTTPOpenapi3JSON(mux goahttp.Muxer, h http.Handler) {
+	mux.Handle("GET", "/openapi.json", h.ServeHTTP)
 }
