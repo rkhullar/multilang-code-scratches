@@ -4,7 +4,7 @@ info:
     description: hello world http service for managing messages
     version: 0.0.1
 servers:
-    - url: http://localhost:8080/message
+    - url: http://0.0.0.0:8080/message
       description: hosts the message service
 paths:
     /messages:
