@@ -6,3 +6,11 @@ services:
     container_name: message-api-goa
     ports:
       - "8080:8080"
+  docs:
+    image: swaggerapi/swagger-ui
+    platform: linux/amd64
+    container_name: "message-api-docs"
+    ports:
+      - "8082:8080"
+    environment:
+      URL: http://localhost:8081/openapi.json

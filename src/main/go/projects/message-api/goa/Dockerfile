@@ -8,6 +8,8 @@ RUN go build -o message-api github.com/rkhullar/python-java-scratches/src/main/g
 
 FROM alpine:latest
 WORKDIR /app
+COPY gen/http/openapi3.json gen/http/openapi3.json
 COPY --from=builder /app/message-api .
+
 
 CMD ["./message-api", "--http-port=8080"]

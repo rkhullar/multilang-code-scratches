@@ -27,6 +27,10 @@ go clean -modcache
 go mod tidy
 ```
 
+```shell
+docker run -p 8081:8080 swaggerapi/swagger-ui
+```
+
 ## Reference
 - https://goa.design/docs/2-getting-started
 - https://github.com/goadesign/examples/blob/master/basic
