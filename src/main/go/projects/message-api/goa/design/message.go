@@ -12,7 +12,7 @@ var _ = API("example", func() {
 		Services("message")
 		Host("development", func() {
 			Description("development hosts")
-			URI("http://0.0.0.0:8080")
+			URI("http://0.0.0.0:8081")
 		})
 	})
 })

@@ -3,7 +3,7 @@ info:
     title: simple example api
     description: example api with hello world message service
     version: 0.0.1
-host: 0.0.0.0:8080
+host: 0.0.0.0:8081
 consumes:
     - application/json
     - application/xml
