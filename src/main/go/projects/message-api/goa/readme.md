@@ -34,3 +34,7 @@ docker run -p 8081:8080 swaggerapi/swagger-ui
 ## Reference
 - https://goa.design/docs/2-getting-started
 - https://github.com/goadesign/examples/blob/master/basic
+
+### Potential Future Work
+- serve openapi docs from goa service by including the swagger-ui codebase
+  - https://medium.com/@divious_1/build-a-go-restful-api-using-goa-that-scales-effortlessly-with-google-app-engine-and-are-67e32da8c828
