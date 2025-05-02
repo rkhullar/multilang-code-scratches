@@ -30,7 +30,7 @@ func UsageCommands() string {
 // UsageExamples produces an example of a valid invocation of the CLI tool.
 func UsageExamples() string {
 	return os.Args[0] + ` message create --body '{
-      "text": "g"
+      "text": "a"
    }'` + "\n" +
 		""
 }
@@ -169,7 +169,7 @@ Create implements create.
 
 Example:
     %[1]s message create --body '{
-      "text": "g"
+      "text": "a"
    }'
 `, os.Args[0])
 }
@@ -191,6 +191,6 @@ Read implements read.
     -id STRING: UUID of the message
 
 Example:
-    %[1]s message read --id "Quae perspiciatis repudiandae."
+    %[1]s message read --id "Est et eligendi eos quo accusantium."
 `, os.Args[0])
 }

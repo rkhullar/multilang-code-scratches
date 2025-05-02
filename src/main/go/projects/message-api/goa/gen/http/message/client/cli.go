@@ -25,7 +25,7 @@ func BuildCreatePayload(messageCreateBody string) (*message.CreatePayload, error
 	{
 		err = json.Unmarshal([]byte(messageCreateBody), &body)
 		if err != nil {
-			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"text\": \"g\"\n   }'")
+			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"text\": \"a\"\n   }'")
 		}
 		if utf8.RuneCountInString(body.Text) < 1 {
 			err = goa.MergeErrors(err, goa.InvalidLengthError("body.text", body.Text, utf8.RuneCountInString(body.Text), 1, true))

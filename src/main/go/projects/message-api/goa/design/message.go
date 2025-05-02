@@ -4,15 +4,15 @@ import (
 	. "goa.design/goa/v3/dsl"
 )
 
-var _ = API("message", func() {
-	Title("simple message service")
-	Description("hello world http service for managing messages")
+var _ = API("example", func() {
+	Title("simple example api")
+	Description("example api with hello world message service")
 	Server("message", func() {
 		Description("hosts the message service")
 		Services("message")
 		Host("development", func() {
 			Description("development hosts")
-			URI("http://0.0.0.0:8080/message")
+			URI("http://0.0.0.0:8080")
 		})
 	})
 })

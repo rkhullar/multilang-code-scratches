@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
-    title: simple message service
-    description: hello world http service for managing messages
+    title: simple example api
+    description: example api with hello world message service
     version: 0.0.1
 servers:
-    - url: http://0.0.0.0:8080/message
+    - url: http://0.0.0.0:8080
       description: hosts the message service
 paths:
     /messages:
@@ -23,19 +23,17 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/Message'
                                 example:
-                                    - id: Nostrum quia et placeat.
-                                      text: Excepturi minima et reprehenderit aut dolor.
-                                    - id: Nostrum quia et placeat.
-                                      text: Excepturi minima et reprehenderit aut dolor.
+                                    - id: Amet officia dolor sit dolorem.
+                                      text: Non tempore velit dolore dolorem dicta.
+                                    - id: Amet officia dolor sit dolorem.
+                                      text: Non tempore velit dolore dolorem dicta.
+                                    - id: Amet officia dolor sit dolorem.
+                                      text: Non tempore velit dolore dolorem dicta.
                             example:
-                                - id: Nostrum quia et placeat.
-                                  text: Excepturi minima et reprehenderit aut dolor.
-                                - id: Nostrum quia et placeat.
-                                  text: Excepturi minima et reprehenderit aut dolor.
-                                - id: Nostrum quia et placeat.
-                                  text: Excepturi minima et reprehenderit aut dolor.
-                                - id: Nostrum quia et placeat.
-                                  text: Excepturi minima et reprehenderit aut dolor.
+                                - id: Amet officia dolor sit dolorem.
+                                  text: Non tempore velit dolore dolorem dicta.
+                                - id: Amet officia dolor sit dolorem.
+                                  text: Non tempore velit dolore dolorem dicta.
         post:
             tags:
                 - message
@@ -48,7 +46,7 @@ paths:
                         schema:
                             $ref: '#/components/schemas/CreateRequestBody'
                         example:
-                            text: g
+                            text: a
             responses:
                 "201":
                     description: Created response.
@@ -57,8 +55,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/Message'
                             example:
-                                id: Dolorum nulla eos et reiciendis.
-                                text: Dolores officia veniam voluptatem consectetur sit.
+                                id: Eum nostrum voluptas illum.
+                                text: Est illo est sed ratione itaque.
     /messages/{id}:
         get:
             tags:
@@ -73,8 +71,8 @@ paths:
                   schema:
                     type: string
                     description: UUID of the message
-                    example: Vel sed alias perspiciatis.
-                  example: Voluptatem nemo iusto debitis ut ipsam et.
+                    example: Eveniet fuga.
+                  example: Aspernatur dicta labore iste et iusto beatae.
             responses:
                 "200":
                     description: OK response.
@@ -83,8 +81,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/Message'
                             example:
-                                id: Non sed dicta sapiente.
-                                text: Voluptas eum earum.
+                                id: Cupiditate magni animi.
+                                text: Error veniam libero omnis odit.
                 "404":
                     description: 'not_found: Not Found response.'
                     content:
@@ -92,7 +90,7 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/NotFoundError'
                             example:
-                                message: Et nam dolor repellat unde nihil voluptas.
+                                message: Id nemo eum beatae provident corporis.
     /openapi.json:
         get:
             tags:
@@ -110,10 +108,10 @@ components:
                 text:
                     type: string
                     description: Message text
-                    example: 5p
+                    example: pzz
                     minLength: 1
             example:
-                text: z
+                text: xo
             required:
                 - text
         Message:
@@ -122,14 +120,14 @@ components:
                 id:
                     type: string
                     description: UUID of the message
-                    example: Odio ratione consequatur omnis nisi nisi.
+                    example: Occaecati ut itaque.
                 text:
                     type: string
                     description: Message text
-                    example: Eligendi aliquam.
+                    example: Labore cum sit illum suscipit.
             example:
-                id: Nam aut adipisci ipsum.
-                text: Facilis est officia numquam eveniet fugit asperiores.
+                id: Quidem asperiores.
+                text: Adipisci quod.
             required:
                 - id
                 - text
@@ -139,9 +137,9 @@ components:
                 message:
                     type: string
                     description: error message
-                    example: Enim in earum reiciendis.
+                    example: Ut et.
             example:
-                message: Veritatis est autem explicabo.
+                message: Modi officia inventore aut fuga.
             required:
                 - message
 tags:

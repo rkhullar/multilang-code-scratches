@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
-    title: simple message service
-    description: hello world http service for managing messages
+    title: simple example api
+    description: example api with hello world message service
     version: 0.0.1
 host: 0.0.0.0:8080
 consumes:
@@ -94,15 +94,15 @@ definitions:
             id:
                 type: string
                 description: UUID of the message
-                example: Consequatur inventore similique libero quos necessitatibus.
+                example: Ut et quo.
             text:
                 type: string
                 description: Message text
-                example: Reprehenderit aliquam neque dicta tempora est consequatur.
+                example: Dolorum et repellendus vero id voluptatem.
         description: CreateResponseBody result type (default view)
         example:
-            id: Dolor at sit perspiciatis maxime ipsa porro.
-            text: Odit quas reiciendis nam.
+            id: Quidem consequatur occaecati excepturi eius exercitationem.
+            text: Quidem cum.
         required:
             - id
             - text
@@ -113,10 +113,10 @@ definitions:
             text:
                 type: string
                 description: Message text
-                example: h
+                example: yar
                 minLength: 1
         example:
-            text: wrb
+            text: v
         required:
             - text
     NotFoundError:
@@ -126,8 +126,8 @@ definitions:
             message:
                 type: string
                 description: error message
-                example: Eum rem expedita quis saepe consequatur non.
+                example: Voluptatum dicta molestiae veniam.
         example:
-            message: Eos enim.
+            message: Magni officia voluptatem voluptate.
         required:
             - message
