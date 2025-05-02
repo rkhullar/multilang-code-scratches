@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	messages = make(map[string]models.Message)
+	messages = make(map[string]*models.Message)
 	mu       sync.RWMutex
 )
 
@@ -27,7 +27,7 @@ func CreateMessage(c *gin.Context) {
 		return
 	}
 	id := uuid.New().String()
-	msg := models.Message{ID: id, Text: req.Text}
+	msg := &models.Message{ID: id, Text: req.Text}
 	mu.Lock()
 	defer mu.Unlock()
 	messages[id] = msg
@@ -43,9 +43,9 @@ func ListMessages(c *gin.Context) {
 	mu.RLock()
 	defer mu.RUnlock()
 	//var result []models.Message
-	result := make([]models.Message, 0) // added to return empty list over null if message is empty
-	for _, m := range messages {
-		result = append(result, m)
+	result := make([]*models.Message, 0) // added to return empty list over null if message is empty
+	for _, msg := range messages {
+		result = append(result, msg)
 	}
 	c.JSON(http.StatusOK, result)
 }
