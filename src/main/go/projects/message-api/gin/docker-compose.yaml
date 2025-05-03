@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    image: message-api-gin
+    platform: linux/amd64
+    container_name: message-api-gin
+    ports:
+      - "8080:8080"

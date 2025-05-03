@@ -1,0 +1,133 @@
+swagger: "2.0"
+info:
+    title: simple example api
+    description: example api with hello world message service
+    version: 0.0.1
+host: 0.0.0.0:8081
+consumes:
+    - application/json
+    - application/xml
+    - application/gob
+produces:
+    - application/json
+    - application/xml
+    - application/gob
+paths:
+    /messages:
+        get:
+            tags:
+                - message
+            summary: list message
+            operationId: message#list
+            responses:
+                "200":
+                    description: OK response.
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/Message'
+            schemes:
+                - http
+        post:
+            tags:
+                - message
+            summary: create message
+            operationId: message#create
+            parameters:
+                - name: CreateRequestBody
+                  in: body
+                  required: true
+                  schema:
+                    $ref: '#/definitions/MessageCreateRequestBody'
+                    required:
+                        - text
+            responses:
+                "201":
+                    description: Created response.
+                    schema:
+                        $ref: '#/definitions/Message'
+            schemes:
+                - http
+    /messages/{id}:
+        get:
+            tags:
+                - message
+            summary: read message
+            operationId: message#read
+            parameters:
+                - name: id
+                  in: path
+                  description: UUID of the message
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: OK response.
+                    schema:
+                        $ref: '#/definitions/Message'
+                "404":
+                    description: Not Found response.
+                    schema:
+                        $ref: '#/definitions/NotFoundError'
+                        required:
+                            - message
+            schemes:
+                - http
+    /openapi.json:
+        get:
+            tags:
+                - message
+            summary: Download gen/http/openapi3.json
+            operationId: message#/openapi.json
+            responses:
+                "200":
+                    description: File downloaded
+                    schema:
+                        type: file
+            schemes:
+                - http
+definitions:
+    Message:
+        title: 'Mediatype identifier: application/vnd.message+json; view=default'
+        type: object
+        properties:
+            id:
+                type: string
+                description: UUID of the message
+                example: Ut et quo.
+            text:
+                type: string
+                description: Message text
+                example: Dolorum et repellendus vero id voluptatem.
+        description: CreateResponseBody result type (default view)
+        example:
+            id: Quidem consequatur occaecati excepturi eius exercitationem.
+            text: Quidem cum.
+        required:
+            - id
+            - text
+    MessageCreateRequestBody:
+        title: MessageCreateRequestBody
+        type: object
+        properties:
+            text:
+                type: string
+                description: Message text
+                example: yar
+                minLength: 1
+        example:
+            text: v
+        required:
+            - text
+    NotFoundError:
+        title: NotFoundError
+        type: object
+        properties:
+            message:
+                type: string
+                description: error message
+                example: Voluptatum dicta molestiae veniam.
+        example:
+            message: Magni officia voluptatem voluptate.
+        required:
+            - message
