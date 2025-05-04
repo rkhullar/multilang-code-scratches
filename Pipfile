@@ -8,9 +8,8 @@ httpx = "~=0.28.0"
 
 [dev-packages]
 flake8 = "*"
-isort = ""
 nose = "*"
 parameterized = "*"
 
 [requires]
-python_version = "3.12"
+python_version = "3.13"
