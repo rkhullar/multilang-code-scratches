@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import os
 
 import grpc
 
@@ -9,7 +10,9 @@ patch_path()
 from protos.generated import example_pb2, example_pb2_grpc
 
 async def main() -> None:
-    async with grpc.aio.insecure_channel('localhost:50052') as channel:
+    server_host = os.environ.get('SERVER_HOST', '[::]')
+    server_port = int(os.environ.get('SERVER_PORT', '50052'))
+    async with grpc.aio.insecure_channel(f'{server_host}:{server_port}') as channel:
         stub = example_pb2_grpc.GreeterStub(channel)
         response = await stub.SayHello(example_pb2.HelloRequest(name='John'))
         print(response.message)

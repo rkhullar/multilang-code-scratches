@@ -17,7 +17,7 @@ class Greeter(example_pb2_grpc.GreeterServicer):
 
 async def serve() -> None:
     server_host = os.environ.get('SERVER_HOST', '[::]')
-    server_port = int(os.environ.get('SERVER_PORT', '50051'))
+    server_port = int(os.environ.get('SERVER_PORT', '50052'))
     server = grpc.aio.server()
     example_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
     listen_addr = f'{server_host}:{server_port}'
