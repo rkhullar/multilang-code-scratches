@@ -18,7 +18,7 @@ gcc14 --version
 g++14 --version
 ```
 
-#### Potential Direnv Config for Usage with Cmake
+####  Direnv Config for Makefiles
 ```shell
 source_up
 export CC="$GCC_HOME/bin/gcc-14"
