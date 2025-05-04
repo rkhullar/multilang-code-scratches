@@ -1,11 +1,26 @@
 ## Note for C++ Programs
-"Compiled with clang 19 using the latest C++ 23 standard, and libstdc++ provided by GCC 14." - Leetcode
+
+#### Leetcode Reference
+"Compiled with clang 19 using the latest C++ 23 standard, and libstdc++ provided by GCC 14."
+
+#### Installation
 ```shell
 brew install gcc
 ```
+
 ```shell
-# set via direnv
-CC=$(brew --prefix gcc)/bin/gcc-14
-CXX=$(brew --prefix gcc)/bin/g++-14
+export GCC_HOME=$(brew --prefix gcc)
+export PATH="$PATH:$GCC_HOME/bin"
 ```
 
+```shell
+gcc14 --version
+g++14 --version
+```
+
+#### Potential Direnv Config for Usage with Cmake
+```shell
+source_up
+export CC="$GCC_HOME/bin/gcc-14"
+export CXX="$GCC_HOME/bin/g++-14"
+```
