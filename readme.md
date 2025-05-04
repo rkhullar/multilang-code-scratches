@@ -1,15 +1,11 @@
-## Tool Versions
-- python: 3.10
-- java: 11.0
+# Multilang Code Scratches
+This repo contains code snippets and small project example in the languages defined below:
 
-## Virtualenv Setup
-```sh
-python -m venv venv
-. venv/bin/activate
-pip install -U pip setuptools
-pip install pipenv
-pipenv install --dev
-```
+## Language Versions
+- python: 3.13
+- java: 21 LTS
+- nodejs: 22 LTS
+- golang: 1.24
 
-## TODO
-- upgrade to [nose2](https://github.com/nose-devs/nose2) or switch python testing framework
+## Additional Docs
+- [installing c++](docs/install-c++.md)
