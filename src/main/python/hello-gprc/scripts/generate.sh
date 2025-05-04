@@ -3,7 +3,7 @@
 here=$(dirname "$(realpath "$0")")
 target_path="${here}/../"
 cd "${target_path}" || exit
-. ../../../../venv/bin/activate
+. venv/bin/activate
 
 set -x
 cd "${target_path}/protos" || exit

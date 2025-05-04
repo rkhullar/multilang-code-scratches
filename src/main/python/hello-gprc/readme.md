@@ -1,5 +1,6 @@
 # Hello Python GPRC
 
+## Generating Python Code from Proto Files
 ```shell
 ./scripts/generate.sh
 ```
